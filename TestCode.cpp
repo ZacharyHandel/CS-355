@@ -16,7 +16,8 @@ int main()
 
     cout << "Input either 1 or 2. If you say 1, I will say yay! if you say 2, I will say boo!" << endl;
     int choice;
-
+    
+    cin >> choice;
     if(choice == 1)
     {
         cout << "YAY!" << endl;

@@ -1,0 +1,97 @@
+%Name- Zachary Handel
+%Assignment- Assignment 2
+%Due Date- August 29th at 11:59 pm
+%Description- This is the .ifd file that Dr. Ray will use in his game engine.
+
+<game>
+
+	<links>
+	 	<linkset>1,2,3,6</linkset>
+		<linkset>1,2,2,2</linkset>
+		<linkset>4,5,11,1</linkset>
+		<linkset>4,3,4,4</linkset>
+		<linkset>3,5,5,5</linkset>
+		<linkset>8,9,1,7</linkset>
+		<linkset>7,7,6,7</linkset>
+		<linkset>8,6,8,8</linkset>
+		<linkset>6,10,9,9</linkset>
+		<linkset>9,10,10,10</linkset>
+		<linkset>12,11,11,3</linkset>
+		<linkset>12,11,12,12</linkset>
+	</links>
+
+%Area1
+	<area>
+		<desc>Ten-Hut Soldier! The military base has been overrun by zombies! You need to escape to survive!</desc>
+		<feats>0,0</feats>
+	</area>
+
+%Area2
+	<area>
+		<desc>Mess Hall. Instead of finding a meal, you were the meal.</desc>
+		<feats>1,0</feats>
+	</area>
+
+%Area3
+	<area>
+		<desc>PT. You don't see any zombies, but you do have flashbacks to climbing the rope at boot camp.</desc>
+		<feats>0,0</feats>
+	</area>
+
+%Area4
+	<area>
+		<desc>Showers. You turn on the showers and drink the water only to realize the water has been contaminated with a dead zombie inside the water tank.</desc>
+		<feats>1,0</feats>
+	</area>
+%Area5
+
+	<area>
+		<desc>Arsenal. You try to grab some guns to help protect you on your escape. However, a faulty grenade falls from the shelf and explodes.</desc>
+		<feats>1,0</feats>
+	</area>
+
+%Area6
+	<area>
+		<desc>Shooting Range. You don't notice any zombies, but you also notice you don't have any weapons to shoot.</desc>
+		<feats>0,0</feats>
+	</area>
+
+%Area7
+	<area>
+		<desc>Front Gate. You notice the front gate and make a break for it. A hoard of zombies follows you, but you remember a landmine system that was installed a week ago. You grab a rock and throw it at the activation button, blowing the whole base to pieces.</desc>
+		<feats>0,1</feats>
+	</area>
+
+%Area8
+	<area>
+		<desc>Guard Tower. You climb the ladder of the guard tower and are met with a hoard of zombies. One rips your head off and screams "brains!"</desc>
+		<feats>1,0</feats>
+	</area>
+
+%Area9
+	<area>
+		<desc>HQ. You enter the building and notice that all of the commanding officers have left before you. There is no danger, however.</desc>
+		<feats>0,0</feats>
+	</area>
+
+%Area10
+	<area>
+		<desc>HUMV. You see an intact HUMV and make a break for it. The keys are already in the ignition, so you take off. Mowing down zombies, you run over the fence and make an escape.</desc>
+		<feats>0,1</feats>
+	</area>
+
+%Area11
+	<area>
+		<desc>Medical Tent. You notice that the medical tent has been ransacked and there is nothing left. There is no danger.</desc>
+		<feats>0,0</feats>
+	</area>
+
+%Area12
+	<area>
+		<desc>Hole in Gate. Your long adventure has paid off and you have found a hole in the gate to escape.</desc>
+		<feats>0,1</feats>
+	</area>
+
+
+
+</game>

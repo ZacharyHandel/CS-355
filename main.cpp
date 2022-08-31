@@ -10,7 +10,8 @@ Description- This program runs the game FizzBuzz. It allows the user to run the 
 using namespace std;
 int main()
 {
-    fizzBuzz f;
+    
     f.printMenu();
+    cout << "Hello World!" << endl;
 }
 

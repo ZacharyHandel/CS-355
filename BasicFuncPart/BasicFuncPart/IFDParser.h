@@ -23,6 +23,12 @@ class IFDParser{
 	   	ifstream inFile;
 	   	inFile.open(gameFile.c_str());
 
+		if(inFile.fail())
+		{
+			cout << "This file was either not found or your input was wrong." << endl;
+			exit(0);
+		}
+
 
 		while(!inFile.eof()){
 			getline(inFile, nextLine);

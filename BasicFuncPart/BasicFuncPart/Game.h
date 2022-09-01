@@ -63,12 +63,15 @@ class Game{
 				}
 				else if(userInput == "reset")
 				{
-					if(player1.getCurrent() == map.getStart())	//detect if already at start
+					if (player1.getCurrent() != map.getStart())	//detect if already at start
 					{
-						cout << "This is already the start" << endl;	//Why does it detect a dead end
-					}					
-					cout << "RESETTING GAME" << endl;
-					player1.setCurrent(map.getStart());
+						cout << "RESETTING GAME" << endl;
+						player1.setCurrent(map.getStart());
+					}	
+					else
+					{
+						cout << "RESETTING GAME" << endl;
+					}				
 				}
 				else{
 					cout<<"I do not understand: "<<userInput<<endl<<endl;

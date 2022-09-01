@@ -12,7 +12,9 @@ class IFDParser{
 	IFDParser(){
 		pos = 0;
 	   	cout << "Enter the name of the game file you want to play: ";
-		cin >> gameFile;
+		//cin >> gameFile;
+
+		getline(cin, gameFile);	
 	}
 
 	void tokenIt(){
@@ -23,7 +25,7 @@ class IFDParser{
 	   	ifstream inFile;
 	   	inFile.open(gameFile.c_str());
 
-		if(inFile.fail())
+		if(inFile.fail())	//detect for failed file or wrong input
 		{
 			cout << "This file was either not found or your input was wrong." << endl;
 			exit(0);

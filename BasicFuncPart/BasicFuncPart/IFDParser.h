@@ -11,7 +11,8 @@ class IFDParser{
 	public:
 	IFDParser(){
 		pos = 0;
-	   	gameFile = "FortUndead.ifd";
+	   	cout << "Enter the name of the game file you want to play: ";
+		cin >> gameFile;
 	}
 
 	void tokenIt(){

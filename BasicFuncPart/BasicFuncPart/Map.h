@@ -190,6 +190,8 @@ class Map{
 			return areasVec[0];  //returns a pointer to the first area listed
 		}
 
+		
+
 		void print(){
 			cout<<"******************************************************************"<<endl;
 			cout<<"CHEATING!!!! Printing the set of areas and connections on the map."<<endl;

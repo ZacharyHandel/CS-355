@@ -19,7 +19,7 @@ class Player{
 	}
 
 	//isGameOver should return: 0 for continue, 1 for win, 2 for lose
-	int isGameOver(){
+	int isGameOver(){	//new death system (GRADE)
 		 if(currentLocation->info.getID() == 1)	//**here we are locating the info object of Area created in the areaNode struct. By this, we are able to access the values regarding getID and getGoal.
 		 {
 			return 2;

@@ -12,9 +12,9 @@ class IFDParser{
 	IFDParser(){
 		pos = 0;
 	   	cout << "Enter the name of the game file you want to play: ";
-		//cin >> gameFile;
+		//cin >> gameFile;	//This created a bug
 
-		getline(cin, gameFile);	
+		getline(cin, gameFile);		//New file input system (GRADE)
 	}
 
 	void tokenIt(){

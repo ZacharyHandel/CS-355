@@ -200,7 +200,7 @@ class Map{
 			return -1;
 		}
 
-		friend ostream& operator << (ostream& output, Map& map)
+		friend ostream& operator << (ostream& output, Map& map)	//new output overload (GRADE HERE)
 		{
 			output<<"******************************************************************"<<endl;
 			output<<"CHEATING!!!! Printing the set of areas and connections on the map."<<endl;

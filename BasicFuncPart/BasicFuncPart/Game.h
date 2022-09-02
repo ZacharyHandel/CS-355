@@ -46,8 +46,9 @@ class Game{
 	  				player1.setCurrent(player1.getCurrent()->r);
 				}
 				else if(userInput == "iseedeadpeople"){ //issdeadpeople cheat code to reveal map
-					map.print();
-					//**Assignment #4 Here** cout<<map;
+					//map.print();
+					//**Assignment #4 Here** 
+					cout<<map;
 				}
 				else if(userInput == "exit"){
 					cout<<"Good bye!"<<endl;
@@ -61,7 +62,7 @@ class Game{
 					cout<<"\t exit: to exit the game."<<endl;
 					cout<<endl;
 				}
-				else if(userInput == "reset")
+				else if(userInput == "reset")	//set pointer back to start
 				{
 					if (player1.getCurrent() != map.getStart())	//detect if already at start
 					{

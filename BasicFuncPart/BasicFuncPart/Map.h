@@ -190,8 +190,39 @@ class Map{
 			return areasVec[0];  //returns a pointer to the first area listed
 		}
 
-		
+		int reverseLookUp(areaNode* addy){
+			for(int i=0; i<areasVec.size(); i++){
+				if(areasVec[i] == addy){
+					return i+1;
+				}
+			}
+			//this should not happen
+			return -1;
+		}
 
+		friend ostream& operator << (ostream& output, Map& map)
+		{
+			output<<"******************************************************************"<<endl;
+			output<<"CHEATING!!!! Printing the set of areas and connections on the map."<<endl;
+			output<<"******************************************************************"<<endl;
+			for(int i=0; i<map.areasVec.size(); i++){
+				cout<<"This is area: "<<i+1<<endl;
+				cout<<map.areasVec[i]->info.getDescription()<<endl;
+				if(map.areasVec[i]->info.getID() == 1){
+					cout<<"Area is INSTADEATH."<<endl;
+				}
+				if(map.areasVec[i]->info.getGoal() == 1){
+					cout<<"Area is GOAL."<<endl;
+				}
+				output<<"Connections:"<<endl;
+				output<<"\t u: Area #"<<map.reverseLookUp(map.areasVec[i]->u)<<endl;
+				output<<"\t d: Area #"<<map.reverseLookUp(map.areasVec[i]->d)<<endl;
+				output<<"\t l: Area #"<<map.reverseLookUp(map.areasVec[i]->l)<<endl;
+				output<<"\t r: Area #"<<map.reverseLookUp(map.areasVec[i]->r)<<endl;
+			}
+			return output;
+		}
+/*
 		void print(){
 			cout<<"******************************************************************"<<endl;
 			cout<<"CHEATING!!!! Printing the set of areas and connections on the map."<<endl;
@@ -213,13 +244,5 @@ class Map{
 			}
 		}
 
-		int reverseLookUp(areaNode* addy){
-			for(int i=0; i<areasVec.size(); i++){
-				if(areasVec[i] == addy){
-					return i+1;
-				}
-			}
-			//this should not happen
-			return -1;
-		}
+*/
 };

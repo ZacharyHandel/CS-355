@@ -6,7 +6,7 @@ Description- This is the implimentation file for FizzBuzz.h
 */
 #include <iostream>
 #include "FizzBuzz.h"
-
+//#include "FizzBuzzExt.h"
 using namespace std;
 
 /*
@@ -15,9 +15,10 @@ Input: None
 Output:Default limit of 100
 Return: None
 */
-fizzBuzz::fizzBuzz()
+FizzBuzz::FizzBuzz(int l)
 {
-	limit = 100;
+	limit = l;
+	cout << "Setting Limit in Base Class Constructor" << endl;
 }
 
 /*
@@ -26,7 +27,7 @@ Input: None
 Output: The actual game function. Runs the logic of the game FizzBuzz
 Return: None
 */
-void fizzBuzz::run()
+void FizzBuzz::run()
 {
 	for (int i = 1; i <= limit; i++)
 	{
@@ -57,7 +58,7 @@ Input: None
 Output: New limit value
 Return: None
 */
-void fizzBuzz::setLimit()
+void FizzBuzz::setLimit()
 {
 	int value;
 	cout << "Set a new limit value: " << endl;
@@ -72,7 +73,7 @@ Input: None
 Output: Menu Screen 
 Return: None
 */
-void fizzBuzz::printMenu()
+void FizzBuzz::printMenu()
 {
 	int choice;
 	cout << " ______ _         ____  _    _        " << endl;

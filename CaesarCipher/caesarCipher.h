@@ -19,7 +19,7 @@ To-Do:
 using namespace std;
 
 class caesarCipher {
-private:
+protected:
 	int shiftValue;
 		
 public:

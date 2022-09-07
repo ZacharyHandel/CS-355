@@ -1,10 +1,21 @@
 /*
 To-Do:
-    - 
+    - create new class called advancedCaesar which
+    derives from this class "caesarCipher.h"
+        - Single private attribute which has
+        an array of characters for storing the cipher
+        alphabet (after it has been shifted)
+        - Paramaterless Constructor and a constructor
+        that accepts a single integer
+            - Constructor is responsible for setting
+            values of the character array to the 26 letters
+            of the alphabet in the order dictated by the shift value
+            - Make sure to make use of the inherited constructors
+        - Print function that now prints out shift value and cipher
+        alphabet
 */
 
 #include <iostream>
-#include <string>
 using namespace std;
 
 class caesarCipher {

@@ -51,10 +51,10 @@ class advancedCaesar: public caesarCipher
 
         void print()
         {
-            cout << "Shift Value: " << shiftValue << endl;
+            cout << shiftValue << endl;
             for(int i = 0; i < MAX_ALPHABET_SIZE; i++)
             {
-                cout << "New Cipher Alphabet: " << cipherAlphabet[i] << endl;
+                cout << cipherAlphabet[i] << endl;
             }
         }
 };

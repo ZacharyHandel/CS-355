@@ -1,7 +1,6 @@
 #include <iostream>
 using namespace std;
 
-#include "FizzBuzz.h"
 #include "FizzBuzzExt.h"
 
 int main()
@@ -9,7 +8,7 @@ int main()
     FizzBuzzExt fizz(100, 150);
     int choice;
 
-    choice = fizz.menu();
+    choice = fizz.compPrintMenu();
     while(choice != 5)
     {
         switch(choice)
@@ -27,10 +26,14 @@ int main()
                 break;
             case 4:
                 fizz.addRule();
+                break;
+            case 5:
+                exit(0);
+                break;
             default:
                 cout << "Invalid Choice" << endl;
         }
-        choice = fizz.menu();
+        choice = fizz.compPrintMenu();
     }
     return 0;
 }

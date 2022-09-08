@@ -1,4 +1,4 @@
-//#include "FizzBuzz.h"
+#include "FizzBuzz.h"
 #include <iostream>
 using namespace std;
 class FizzBuzzExt : public FizzBuzz
@@ -34,16 +34,18 @@ class FizzBuzzExt : public FizzBuzz
             numrules++; //change index every time we add a new rule
         }
 
-        int menu()
+        int compPrintMenu()
         {
             int choice;
-	        cout << "********Menu********" << endl;
-	        cout << "1. Run Game" << endl;
-	        cout << "2. Set New Limit Value" << endl;
-	        cout << "3. Quit" << endl;
-            cout << "Enter your menu option: " << endl;
-            cin >> choice;
-            return choice;
+	    cout << endl << endl;
+	    cout << "********Menu********" << endl;
+	    cout << "1. Run Game" << endl;
+	    cout << "2. Set New Limit Value" << endl;
+	    cout << "3. Clear" << endl;
+        cout << "4. Add a new parameter" << endl;
+        cout << "5. Quit" << endl;
+	    cin >> choice;
+        return choice;
         }
 
         void run()

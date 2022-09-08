@@ -15,6 +15,12 @@ To-Do:
         alphabet
 */
 
+/*
+Name- Zachary Handel
+Assignment- Assignment 3
+Due Date-
+Description- 
+*/
 #include <iostream>
 using namespace std;
 
@@ -34,12 +40,15 @@ public:
 	string encrypt(string s){ 
 		for(int i=0;i<(s.length());i++){
 			if (s[i] >= 97 && s[i] <= 122){
-				if (s[i]+shiftValue > 122){ 
-					s[i]=122-(s[i]%97);	
+				s[i] += shiftValue;
+				if (s[i] > 122){ 
+					s[i]=((s[i]%122)+97)-1;	
 				}
-				else{
-					s[i]+=shiftValue;
-				}		
+						
+			}
+			else
+			{
+				cout << "Only imput lowercase values." << endl;
 			}
 		}
 		return s;
@@ -48,12 +57,14 @@ public:
 	string decrypt(string s){ 
 		for(int i=0;i<s.length();i++){
 			if (s[i] >= 97 && s[i] <= 122){
-				if (s[i]-shiftValue < 97){
-					s[i]=97+(122%s[i]);
-				}			
-				else{
-					s[i]-=shiftValue;		
-				}		
+				s[i]-= shiftValue;
+				if (s[i]< 97){
+					s[i]=122-(97-s[i]-1);
+				}				
+			}
+			else
+			{
+				cout << "Only imput lowercase values." << endl;
 			}
 		}
 		return s;

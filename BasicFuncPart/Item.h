@@ -53,6 +53,7 @@ class Item
             output << item.itemName << endl;
             output << item.itemDescription << endl;
             output << item.srItems << endl;
+            return output;
         }
 
 };

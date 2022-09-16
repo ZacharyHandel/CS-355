@@ -1,5 +1,7 @@
+#ifndef AREA_H
+#define AREA_H
 #include "Area.h"
-
+#endif
 class Player{
   public:
     Player(){	//constructor
@@ -126,11 +128,9 @@ class Player{
 						cout << "You have dropped: " << tempPointer->info->getName() << endl;
 						items.deleteNode(tempPointer->info);
 						currentLocation->info.items.insertLast(tempPointer->info);
+						break;
 					}
-					else
-					{
-						tempPointer = tempPointer -> link;
-					}
+					tempPointer = tempPointer -> link;
 				}
 
 				if(foundInInventory == false)

@@ -1,3 +1,7 @@
+#ifndef AREA_H
+#define AREA_H
+#include "Area.h"
+#endif
 class Player{
   public:
     Player(){	//constructor
@@ -37,6 +41,134 @@ class Player{
 			return 0;
 		 }
 	}
+
+		uLList<Item*> items;
+
+		void inventory()
+		{
+			if(items.isEmptyList())
+			{
+				cout << "No items are present in inventory." << endl;
+			}
+			else
+			{
+				nodeType<Item*> *tempPointer = items.getFirst();
+				cout << "You have the following items:" << endl;
+				while(tempPointer != NULL)
+				{
+					cout << "\t";
+					cout << tempPointer->info->getName() << endl;
+
+					tempPointer = tempPointer -> link;
+				}
+			}
+		}
+
+		void take()
+		{
+			string takenItem;
+			cout << "Take what item?" << endl;
+			getline(cin, takenItem);
+
+			nodeType<Item*> *tempPointer = currentLocation->info.items.getFirst();
+
+			bool foundFlag = false;
+			if(tempPointer == NULL)
+			{
+				cout << "No items in this area to take." << endl;
+			}
+			else
+			{
+				while(tempPointer != NULL)
+				{
+					
+					if(takenItem == tempPointer->info->getName())
+					{
+						foundFlag = true;
+						cout << "You have taken: " << tempPointer->info->getName() << endl;
+						items.insertLast(tempPointer->info);
+						currentLocation->info.items.deleteNode(tempPointer->info);
+						break;
+					}
+					tempPointer = tempPointer -> link;
+
+					
+				
+				}
+
+				if(foundFlag == false)
+				{
+					cout << "No item by that name here." << endl;
+				}
+			}
+
+		}
+
+		void leave()
+		{
+			string leftItem;
+			cout << "Leave what item?: " << endl;
+			getline(cin, leftItem);
+
+			nodeType<Item*> *tempPointer = items.getFirst();
+
+			bool foundInInventory = false;
+
+			if(items.getFirst() == NULL)
+			{
+				cout << "You have no items in your inventory to examine." << endl;
+			}
+			else
+			{
+				while(tempPointer != NULL)
+				{
+					if(leftItem == tempPointer->info->getName())
+					{
+						foundInInventory = true;
+						cout << "You have dropped: " << tempPointer->info->getName() << endl;
+						items.deleteNode(tempPointer->info);
+						currentLocation->info.items.insertLast(tempPointer->info);
+						break;
+					}
+					tempPointer = tempPointer -> link;
+				}
+
+				if(foundInInventory == false)
+				{
+					cout << "No item by that name in your inventory." << endl;
+				}
+			}
+		}
+
+		void examine()
+		{
+			string examinedItem;
+			cout << "Examine what item? " << endl;
+			getline(cin, examinedItem);
+
+			nodeType<Item*> *tempPointer = items.getFirst();
+			bool examineFound = false;
+
+			if(tempPointer == NULL)
+			{
+				cout << "You have no items in your inventory to examine." << endl;
+			}
+
+			while(tempPointer != NULL)
+			{
+				if(examinedItem == tempPointer->info->getName())
+				{
+					examineFound == true;
+					cout << tempPointer->info->getDesc() << endl;
+				}
+					tempPointer = tempPointer->link;
+
+			}
+			if(examineFound == false)
+			{
+				cout << "No item by that name in your inventory." << endl;
+			}
+		}
 
   private:
 		areaNode* currentLocation;

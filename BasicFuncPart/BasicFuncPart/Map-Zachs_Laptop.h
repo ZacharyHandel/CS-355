@@ -5,10 +5,13 @@
 #include <sstream> //??
 #include <stdlib.h>
 
-
+#ifndef MAN_H
+#define MAP_H
 #include "IFDParser.h"
 #include "LinkData.h"
 #include "Area.h"
+//#include "Item.h"
+#endif
 
 using namespace std;
 
@@ -22,7 +25,7 @@ struct areaNode
 };
 
 class Map{
-	private:
+	protected:
 		vector<areaNode*> areasVec;
 		int areacnt;
 
@@ -36,7 +39,7 @@ class Map{
 		bool ifderr;
 
 	public:
-		Map();
+		//Map();
 
 		void makeArea(){
 			int id;

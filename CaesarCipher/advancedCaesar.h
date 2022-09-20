@@ -1,12 +1,9 @@
-<<<<<<< HEAD
 /*
 Name- Zachary Handel
 Assignment- Assignment 3
 Due Date-
 Description- 
 */
-=======
->>>>>>> 7282639eb30e59d6f09ad8a20bb38e8758f05e75
 #include <iostream>
 #include "caesarCipher.h"
 using namespace std;

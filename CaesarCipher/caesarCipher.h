@@ -48,7 +48,7 @@ public:
 			}
 			else
 			{
-				cout << "Only imput lowercase values." << endl;
+				cout << "Only input lowercase values." << endl;
 			}
 		}
 		return s;

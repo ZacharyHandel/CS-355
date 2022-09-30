@@ -6,12 +6,13 @@
 #include <iostream> 
 #include <cassert>
 
+#include "StackADT.h"
 #include "StackIterator.h"
  
 using namespace std;
 
 template <class Type>
-class stackType: public StackIterator<Type>
+class stackType: public stackADT<Type>
 {
 public:
     const stackType<Type>& operator=(const stackType<Type>&); 
@@ -67,7 +68,11 @@ public:
       //Postcondition: The array (list) holding the stack 
       //               elements is deleted.
 
-private:
+    Type getTop();
+
+    Type* getList();
+
+protected:
     int maxStackSize; //variable to store the maximum stack size
     int stackTop;     //variable to point to the top of the stack
     Type *list;       //pointer to the array that holds the
@@ -190,6 +195,18 @@ const stackType<Type>& stackType<Type>::operator=
         copyStack(otherStack);
 
     return *this; 
-} //end operator=         
+} //end operator=  
+
+template <class Type>
+Type stackType<Type>::getTop()
+{
+  return stackTop-1;
+}
+
+template <class Type>
+Type* stackType<Type>::getList()
+{
+  return list;
+}
 
 #endif

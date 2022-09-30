@@ -1,15 +1,18 @@
 #ifndef TESTPROG_H
 #define TESTPROG_H
 #include "myStack.h"
+#include <iostream>
 using namespace std;
 
+int const MAX_SIZE = 50;
 int main()
 {
     stackType<int> stack1;
+    stackType<int> stackTemp;
     int num;
 
     stack1.initializeStack();
-    cout << "Enter integers. When done, input -999: " << endl;
+    cout << "Input numbers, when done enter -999: " << endl;
     cin >> num;
 
     while(num != -999)
@@ -18,22 +21,23 @@ int main()
         cin >> num;
     }
 
-    cout << endl;
-
-    cout << "top element of stack: " << stack1.top() << endl;
-
-    StackIterator<int> it;
-    stackType<int> stackC;
-    stackC = stack1;
-    
-    for(it = stack1.top(); !stack1.isEmptyStack(); ++it)
+    stackTemp = stack1;
+    //testing stack functionality
+    cout << "printing stack: " << endl;
+    while(!stackTemp.isEmptyStack())
     {
-        cout << *it << " ";
+        cout << stackTemp.top() << endl;
+        stackTemp.pop();
+    }    
+
+    cout << "Iteration through stack: " << endl;
+    StackIterator<int> it(stack1.getList(), 0);
+    for(it = stack1.getTop(); it != -1; ++ it)
+    {
+        cout << *it << endl;
     }
-    cout << endl;
-
-
-    return 0;  
+    
+    return 0;
 }
 
 #endif

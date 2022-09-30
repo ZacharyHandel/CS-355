@@ -7,33 +7,48 @@ template <class Type>
 class StackIterator{
 
     private:
-        Type info;
-        Type current;
-    public:
+        int index;
+        Type *current;
 
-        
+    public:
         StackIterator()
         {
-            current = 0;
+            index = 0;
+            current = nullptr;
         }
 
-        StackIterator(Type c)
+        StackIterator(Type *c, int i)
         {
+            index = i;
             current = c;
         }
 
+        Type operator++()
+        {
+            return index--;
+        }
 
         Type operator*()
         {
-            return info;
+            return current[index];
         }
 
-        StackIterator<Type> operator++()
+        bool operator!=(int i)
         {
-            current++;
-
-            return current;
+            return index != i;
         }
+
+        bool operator==(int i)
+        {
+            return index == i;
+        }
+
+        void operator=(int i)
+        {
+            index = i;
+        }
+
+
 
 };
 

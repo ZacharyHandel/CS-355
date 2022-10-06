@@ -13,10 +13,10 @@ class LinkData{
 			digits[2] = l;
 			digits[3] = r;
 		}
+		
 		int getDigit(int pos){
 			return digits[pos];
 		}
-
 	private:
 		int digits[4];
 };

@@ -6,7 +6,9 @@
 #ifndef ullItem
 #define ullItem
 	#include "ull.h"
-	#include "Item.h"
+	//#include "Item.h"
+    #include "UseItem.h"
+    #include "ConsumeItem.h"
 #endif
 
 using namespace std;

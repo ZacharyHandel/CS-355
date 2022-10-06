@@ -1,17 +1,18 @@
 #ifndef ullItem
 #define ullItem
-	#inlcude "ull.h"
+	#include "ull.h"
 	#include "Item.h"
+	#include "Map.h"
 #endif
 
 class Player{
 	public:
 		uLList<Item*> items;	//create an unlinked list of item pointers named 'items'
 
-		Player()
+		Player(areaNode* last_Location = nullptr, areaNode* current_Location = nullptr)
 		{
-			lastLocation = NULL;
-			currentLocation = NULL;
+			lastLocation = last_Location;
+			currentLocation = current_Location;
 		}	//default constructor
 
 		void setCurrent(areaNode* loc)

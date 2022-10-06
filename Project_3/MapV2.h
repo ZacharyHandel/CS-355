@@ -4,12 +4,14 @@ using namespace std;
 #ifndef MAP_V2
 #define MAP_V2
 #include "Map.h"
-#include "Player.h"
+#include "BasicPlayer.h"
+#include "HPSPPlayer.h"
 #endif
 class MapV2 : public Map
 {
     private:
         vector<Item*> itemVec; //vector for storing pointers to item objects
+		//vector<Player*> playerVec;	//new player vec for different kinds of player pointers (might not be needed, but just folloing repitition)
     public:
         MapV2(){
 			ifderr = false;
@@ -21,7 +23,13 @@ class MapV2 : public Map
 				parser.eatToken();
 				nextToken = parser.getNext();
 				while(nextToken != "</game>"){  //consider what happens when run out of tokens && not error state
-					if(nextToken == "<area>"){
+					if(nextToken == "<ptype>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						makePlayer();	//need to write code
+					}
+					else if(nextToken == "<area>"){
 						parser.eatToken();
 						nextToken = parser.getNext();
 						makeArea();
@@ -131,45 +139,164 @@ class MapV2 : public Map
                 }
         }
 
+
         void makeItem()
         {
-            Item* tempPointer = new Item;
+            //Item* tempPointer = new Item;
             while(nextToken != "</item>")
             {
-                if(nextToken == "<name>")
-                {
-                    parser.eatToken();
-                    nextToken = parser.getNext();
-                    tempPointer->setName(nextToken);
-                }
-                else if (nextToken == "<desc>")
-                {
-                    parser.eatToken();
-                    nextToken = parser.getNext();
-                    tempPointer->setDesc(nextToken);
-                }
-                else if (nextToken == "<star>")
-                {
-                    parser.eatToken();
-                    nextToken = parser.getNext();
-                    tempPointer -> setSR(stoi(nextToken));
-                }
-                else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</star>")
-                {
-                    //nothing
-                }
-                else
-                {
-                    cout << "Parse Error Location 2" << endl;
-                    ifderr = true;
-                    break;
-                }
-                parser.eatToken();
-				nextToken = parser.getNext();
-                
-                
+				if(nextToken == "<use>")
+				{
+					parser.eatToken();
+					nextToken = parser.getNext();
+					Item* tempPointer = new UseItem;
+					if(nextToken == "<name>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setName(nextToken);
+					}
+					else if (nextToken == "<desc>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setDesc(nextToken);
+					}
+					else if (nextToken == "<star>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer -> setSR(stoi(nextToken));
+					}
+					else if(nextToken == "<actmess>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setActiveMessage(nextToken);
+					}
+					else if(nextToken == "<actar>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setActiveArea(stoi(nextToken));
+					}
+					else if(nextToken == "<rule>")
+					{
+						//add rules
+					}
+					else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</star>"
+								|| nextToken == "</actmess>" || nextToken == "</actar>" || nextToken =="</rule>")
+					{
+						//nothing
+					}
+					else
+					{
+						cout << "Parse Error Location 2" << endl;
+						ifderr = true;
+						break;
+					}
+					parser.eatToken();
+					nextToken = parser.getNext();
+            		itemVec.push_back(tempPointer);
+				}	//end of if use
+				else if(nextToken == "<basic>")
+				{
+					Item* tempPointer = new Item;
+					if(nextToken == "<name>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setName(nextToken);
+					}
+					else if (nextToken == "<desc>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setDesc(nextToken);
+					}
+					else if (nextToken == "<star>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer -> setSR(stoi(nextToken));
+					}
+					else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</star>")
+					{
+						//nothing
+					}
+					else
+					{
+						cout << "Parse Error Location 2" << endl;
+						ifderr = true;
+						break;
+					}
+					parser.eatToken();
+					nextToken = parser.getNext();
+            		itemVec.push_back(tempPointer);
+				}//end of if basic
+				else if(nextToken == "<consume>")
+				{
+					Item* tempPointer = new ConsumeItem;
+					if(nextToken == "<name>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setName(nextToken);
+					}
+					else if (nextToken == "<desc>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setDesc(nextToken);
+					}
+					else if (nextToken == "<star>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer -> setSR(stoi(nextToken));
+					}
+					else if (nextToken == "<actmess>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setActiveMessage(nextToken);
+					}
+					else if(nextToken == "<actar>")
+					{
+						parser.eatToken();
+						nextToken = parser.getNext();
+						tempPointer->setActiveArea(stoi(nextToken));
+					}
+					else if(nextToken == "<effect>")
+					{
+						//make effect thing
+					}
+					else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</star>"
+								|| nextToken == "</actmess>" || nextToken == "</actar>" || nextToken =="</effect>")
+					{
+						//nothing
+					}
+					else
+					{
+						cout << "Parse Error Location 2" << endl;
+						ifderr = true;
+						break;
+					}
+					parser.eatToken();
+					nextToken = parser.getNext();
+            		itemVec.push_back(tempPointer);
+				}	//end of is consume
+				else if(nextToken == "</use>" || "</consume>" || "</basic>")
+				{
+					//nothing
+				}
+				else
+				{
+					cout << "Parse Error Location 2" << endl;
+					ifderr = true;
+					break;
+				}
             }
-            itemVec.push_back(tempPointer);
         }
 
         void resetItems()
@@ -179,6 +306,40 @@ class MapV2 : public Map
                 areasVec[i]->info.items.destroyList();
             }
         }
+
+		void makePlayer()
+		{
+			while(nextToken != "</ptype>")
+			{
+				if(nextToken == "basic")
+				{
+					parser.eatToken();
+					nextToken = parser.getNext();
+					cout << "Creating Basic Player ... READY!" << endl;
+					Player* tempPlayerPtr = new BasicPlayer;
+					//playerVec.push_back(tempPlayerPtr);
+					//make basic player	
+					
+				}
+				else if(nextToken == "hpsp")
+				{
+					parser.eatToken();
+					nextToken = parser.getNext();
+					cout << "Creating HPSP Player ... READY!" << endl;
+					Player* tempPlayerPtr = new HPSPPlayer;
+					//playerVec.push_back(tempPlayerPtr);
+					//make hpsp player
+				}
+				else
+				{
+					cout << "Parsing Error Location 2" << endl;
+					ifderr = true;
+					break;
+				}
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}
 
         friend ostream& operator << (ostream& output, MapV2& map)
         {

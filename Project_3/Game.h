@@ -11,7 +11,6 @@ class Game{
 	private:
 		Player* player1;
 		MapV2 map;
-			
   	public:
 		Game(){
 			player1->setCurrent(map.getStart());

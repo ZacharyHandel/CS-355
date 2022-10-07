@@ -26,21 +26,27 @@ class MapV2 : public Map
 					if(nextToken == "<ptype>")
 					{
 						parser.eatToken();
+						cout << "Eating Token***" << endl;
 						nextToken = parser.getNext();
+						cout << "Getting Next Token***" << endl;
+						cout << "Calling MakePlayer***" << endl;
 						makePlayer();	//need to write code
 					}
 					else if(nextToken == "<area>"){
+						cout << "Calling MakeArea***" << endl;
 						parser.eatToken();
 						nextToken = parser.getNext();
 						makeArea();
 					}
 					else if(nextToken == "<links>"){
+						cout << "Calling MakeLinks***" << endl;
 						parser.eatToken();
 						nextToken = parser.getNext();
 						makeLinks();
 					}
                     else if(nextToken == "<item>")
                     {
+						cout << "Calling MakeItem***" << endl;
                         parser.eatToken();
                         nextToken = parser.getNext();
                         makeItem();
@@ -97,7 +103,6 @@ class MapV2 : public Map
 				if(nextToken == "<desc>"){
 					parser.eatToken();
 					nextToken = parser.getNext();
-
 					tempNodePtr->info.setDescription(nextToken);    //go to the object pointed to by tempNodePtr
 				}
 				else if(nextToken == "<feats>"){
@@ -109,7 +114,7 @@ class MapV2 : public Map
           				tempNodePtr->info.setID(atoi(xstr.c_str()));
 
           				getline(ss, xstr, ',');
-					tempNodePtr->info.setGoal(atoi(xstr.c_str()));
+						tempNodePtr->info.setGoal(atoi(xstr.c_str()));
 				}
 				else if(nextToken == "</desc>" || nextToken == "</feats>"){
 				  //do nothing
@@ -119,7 +124,6 @@ class MapV2 : public Map
 					ifderr = true;
 					break;
 				}
-
 				parser.eatToken();
 				nextToken = parser.getNext();
 			}//while !</area>
@@ -301,7 +305,7 @@ class MapV2 : public Map
 
         void resetItems()
         {
-            for(int i = 0; areasVec.size(); i++)
+            for(int i = 0; i < areasVec.size(); i++)
             {
                 areasVec[i]->info.items.destroyList();
             }
@@ -311,8 +315,10 @@ class MapV2 : public Map
 		{
 			while(nextToken != "</ptype>")
 			{
+				cout << "INSIDE PTYPE WHILE LOOP***" << endl;
 				if(nextToken == "basic")
 				{
+					cout << "INSIDE BASIC***" << endl;
 					parser.eatToken();
 					nextToken = parser.getNext();
 					cout << "Creating Basic Player ... READY!" << endl;
@@ -323,9 +329,13 @@ class MapV2 : public Map
 				}
 				else if(nextToken == "hpsp")
 				{
+					cout << "INSIDE HPSP***" << endl;
+					cout << "Eating Token inside hpsp***" << endl;
 					parser.eatToken();
+					cout << "Getting next Token inside HPSP***" << endl;
 					nextToken = parser.getNext();
 					cout << "Creating HPSP Player ... READY!" << endl;
+					cout << "DYNAMICALLY ALLOCATING NEW HPSP PLAYER***" << endl;
 					Player* tempPlayerPtr = new HPSPPlayer;
 					//playerVec.push_back(tempPlayerPtr);
 					//make hpsp player
@@ -336,9 +346,16 @@ class MapV2 : public Map
 					ifderr = true;
 					break;
 				}
+				//cout << "Eating Token Outside Player While***" << endl;
+				//parser.eatToken();
+				//cout << "Getting Next Token While Outside Player While***" << endl;
+				//nextToken = parser.getNext();
 			}
-			parser.eatToken();
-			nextToken = parser.getNext();
+			//cout << "OUTSIDE PLAYER WHILE***" << endl;
+			//cout << "OUTSIDE PLAYER WHILE EATING TOKEN AGAIN***" << endl;
+			//parser.eatToken();
+			//cout << "OUTSIDE PLAYER WHILE GETTING NEXT TOKEN**" << endl;
+			//nextToken = parser.getNext();
 		}
 
         friend ostream& operator << (ostream& output, MapV2& map)

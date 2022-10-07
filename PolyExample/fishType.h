@@ -12,7 +12,6 @@ class fishType : public petType
     private:
         string color;
     public:
-        public:
         fishType(string name = "", string co = "") : petType(name)
         {
             color = co;

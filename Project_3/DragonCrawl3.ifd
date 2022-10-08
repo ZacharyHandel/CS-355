@@ -99,7 +99,7 @@
 			<star>2</star>
 			<actmess>Eating this was maybe a bad idea.  I don't know if that's going to work out for you.</actmess>
 			<actar>0</actar>
-			<effect>0, 10</effect>	
+			<effect>0,10</effect>	
 		</consume>
 	</item>
 

@@ -9,10 +9,7 @@ class BasicPlayer : public Player
     private:
         //no new private attributes
     public:
-        BasicPlayer(areaNode* currentLocation = NULL, areaNode* lastLocation = NULL) : Player(currentLocation, lastLocation)
-        {
-            //no new attributes
-        }
+
         int isGameOver()
         {
             if(currentLocation->info.getID() == 1)
@@ -50,6 +47,6 @@ class BasicPlayer : public Player
 
 		void use(Map* mapptr) 
         {
-            
+
         }
 };

@@ -99,11 +99,10 @@ class Item
             return blank;
         }
 
-        virtual vector<Effect*> addEffect(Effect* temp)
+        virtual void addEffect(Effect* temp)
         {
             //shouldn't ever call this method directly
-            vector<Effect*> blank;
-            return blank;
+            cout << "DEBUG WARNING: Object of the Item (basic items) class don't have associated rules." << endl;
         }
 
         friend ostream& operator<<(ostream&, Item&);

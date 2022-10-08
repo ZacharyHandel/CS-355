@@ -85,15 +85,21 @@ class Map{
 		} //end makeArea()
 
 		void makeLinks(){
+			//cout << "Inside makeLinks***" << endl;
 			string xstr;
 			int u, d, l, r;
+			//cout << "Outside while !</links>***" << endl;
 			while(nextToken != "</links>"){
+				//cout << "Inside while != </links>***" << endl;
 				if(nextToken == "<linkset>"){
+					//cout << "Inside if <linkset>***" << endl;
 					parser.eatToken();
 			  		nextToken = parser.getNext();
 
+					//cout << "Creating new linkDataPointer***" << endl;
 					LinkData* tempLDPtr = new LinkData;
 
+					//cout << "Before Assigning directions***" << endl;
 					istringstream ss(nextToken);
         				getline(ss, xstr, ',');
         				u = atoi(xstr.c_str());
@@ -103,11 +109,17 @@ class Map{
         				l = atoi(xstr.c_str());
 					getline(ss, xstr, ',');
 					r = atoi(xstr.c_str());
+					//cout << "After Assigning directions***" << endl;
 
+					//cout << "Before setDigits***" << endl;
 					tempLDPtr->setDigits(u, d, l, r);
+					//cout << "After setDigits***" << endl;
+						//cout << "Pushing to linkVec***" << endl;
           				linkVec.push_back(tempLDPtr);
+
 				}
 				else if(nextToken == "</linkset>"){
+					//cout << "DETECTION OF DO NOTHING FOR </linkset>***" << endl;
 					//do nothing
 				}
 				else{
@@ -133,6 +145,10 @@ class Map{
 
 		areaNode* getStart(){
 			return areasVec[0];  //returns a pointer to the first area listed
+		}
+
+		areaNode* getVecAtIndex(int i){
+			return areasVec[i];
 		}
 
 		int reverseLookUp(areaNode* addy){

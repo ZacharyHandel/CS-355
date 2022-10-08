@@ -9,17 +9,23 @@ class Player{
 	public:
 		uLList<Item*> items;	//create an unlinked list of item pointers named 'items'
 
-		Player(areaNode* last_Location = nullptr, areaNode* current_Location = nullptr)
+		Player()
 		{
-			lastLocation = last_Location;
-			currentLocation = current_Location;
+			lastLocation == NULL;
+			currentLocation == NULL;
 		}	//default constructor
 
 		void setCurrent(areaNode* loc)
 		{
-			lastLocation = currentLocation;	//set the last location to the previous current location
+			//cout << "Inside setCurrent***" << endl;
+			
+			lastLocation = currentLocation;
+			//cout << "setting lastLocation equal to currentLocation***" << endl;
 
+			//cout << "Setting current location equal to loc***" << endl;
 			currentLocation = loc;	//set the current location equal to the new location
+
+			//cout << "End of setCurrent***" << endl;
 		}
 
 		bool playerMoved()
@@ -91,14 +97,14 @@ class Player{
 						temp = temp->link;	//go to next item in list if not found
 					}
 
-					if(found)
-					{
-						cout << "You have taken: " << n << endl;
-					}
-					else
-					{
-						cout << "No item by that name here." << endl;
-					}
+				}
+				if(found)
+				{
+					cout << "You have taken: " << n << endl;
+				}
+				else
+				{
+					cout << "No item by that name here." << endl;
 				}
 			}
 		}
@@ -137,11 +143,21 @@ class Player{
 						//delete from player list
 
 						items.deleteNode(temp->info);
+						break;
 					}
 					else
 					{
 						cout << "No item by that name in your inventory." << endl;
+						break;
 					}
+				}
+				if(found)
+				{
+					cout << "You have dropped: " << n << endl;
+				}
+				else
+				{
+					cout << "No item by that name in your inventory." << endl;
 				}
 			}
 
@@ -153,7 +169,7 @@ class Player{
 			string n;
 			getline(cin, n);
 
-			//cout << "Looking for item " << n << endl;
+			cout << "Looking for item " << n << endl;
 
 			nodeType<Item*>* temp = NULL;
 
@@ -176,6 +192,7 @@ class Player{
 
 						//display item description
 						cout << temp->info->getDesc() << endl;
+						break;
 					}
 					else
 					{

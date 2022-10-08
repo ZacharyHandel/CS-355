@@ -7,7 +7,11 @@ using namespace std;
 
 class UseItem : public Item
 {
+    private:
+        vector<Rule*> rulesVec;
     public:
+
+
         void setActiveMessage(string s)
         {
             activeMessage = s;
@@ -27,6 +31,14 @@ class UseItem : public Item
         {
             return activeArea;
         }
-    private:
-        
+
+        vector<Rule*> getItemUseRules()
+        {
+            return rulesVec;
+        }
+
+        void addRule(Rule* temp)
+        {
+            rulesVec.push_back(temp);
+        }    
 };

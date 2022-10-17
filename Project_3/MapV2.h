@@ -226,8 +226,10 @@ class MapV2 : public Map
 					//cout << "Inside If actar***" << endl;
 					parser.eatToken();
 					nextToken = parser.getNext();
+					istringstream ss(nextToken);
+					getline(ss,xstr);
 					//cout << "Setting UseItem ActiveArea***" << endl;
-					tempItemPointer->setActiveArea(stoi(nextToken));
+					tempItemPointer->setActiveArea(atoi(xstr.c_str()));
 				}
 				else if(nextToken == "<rule>")
 				{
@@ -236,18 +238,18 @@ class MapV2 : public Map
 					nextToken = parser.getNext();
 					
 					//make rule
-					Rule* temp = new Rule;
+					Rule* tempR = new Rule;
 					istringstream ss(nextToken);
 						getline(ss,xstr,',');
-						temp->beginRm = atoi(xstr.c_str());
+						tempR->beginRm = atoi(xstr.c_str());
 
 						getline(ss,xstr,',');
-						temp->direction = atoi(xstr.c_str());
+						tempR->direction = xstr[0];
 
 						getline(ss,xstr,',');
-						temp->destRm = atoi(xstr.c_str());
+						tempR->destRm = atoi(xstr.c_str());
 					//add rule
-					tempItemPointer->addRule(temp);
+					tempItemPointer->addRule(tempR);
 
 				}
 				else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</star>"

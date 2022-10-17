@@ -132,6 +132,20 @@ class Map{
 			}//while !</links>
 		}//makeLinks()
 
+		void linkNewLinks(int curRm, int destRm, char dir)	//member function to link new links from use items
+		{
+			if(dir == 'u')
+				areasVec[curRm-1]->u = areasVec[destRm-1];
+			else if(dir == 'd')
+				areasVec[curRm-1]->d = areasVec[destRm-1];
+			else if(dir = 'l')	
+				areasVec[curRm-1]->l = areasVec[destRm-1];
+			else if(dir = 'r')
+				areasVec[curRm - 1]->r = areasVec[destRm-1];
+			else
+				cout << "ERROR: INCORRECT DIRECITON INDICATION IN IFD FILE! Check rule for correct letter (u,d,l,r)." << endl;
+
+		}
 
 		void linkLinks(){
 			for(int i=0; i<linkVec.size(); i++){
@@ -159,6 +173,26 @@ class Map{
 			}
 			//this should not happen
 			return -1;
+		}
+
+		void updateRule(Rule* rlptr)
+		{
+			if(rlptr->direction == 'u')
+			{
+				areasVec[rlptr->beginRm -1]->u = areasVec[rlptr->destRm -1];
+			}
+			if(rlptr->direction == 'd')
+			{
+				areasVec[rlptr->beginRm -1]->d = areasVec[rlptr->destRm -1];
+			}
+			if(rlptr->direction == 'l')
+			{
+				areasVec[rlptr->beginRm -1]->l = areasVec[rlptr->destRm -1];
+			}
+			if(rlptr->direction == 'r')
+			{
+				areasVec[rlptr->beginRm -1]->r = areasVec[rlptr->destRm -1];
+			}
 		}
 
 		friend ostream& operator << (ostream& output, Map& map)	//new output overload (GRADE HERE)

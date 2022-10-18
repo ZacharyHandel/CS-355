@@ -45,8 +45,67 @@ class BasicPlayer : public Player
             cout << "Basic Players cannot consume items." << endl;
         }
 
-		void use(Map* mapptr) 
+        void use(Map* mapptr)
         {
+            bool found = false;
+            bool goodLocation = false;
+            string n;
 
+            nodeType<Item*>* temp = items.getFirst();
+
+            if(temp == NULL)
+            {
+                cout << "You have no items in your inventory." << endl;
+            }
+            else
+            {
+                cout << "Use what item?" << endl;
+                getline(cin, n);
+                
+                while(temp != NULL && !found)
+                {
+                    if(n == temp->info->getName())
+                    {
+                        found = true;
+                        if(temp->info->getActiveArea() == 0 || temp->info->getActiveArea() == mapptr->reverseLookUp(currentLocation))
+                        {
+                            goodLocation = true;
+                        }
+                    }
+                    else
+                    {
+                        temp = temp->link;
+                    }
+                }
+
+                if(!found)
+                {
+                    cout << "No items by that name in your inventory." << endl;
+                }
+                else if(temp->info->getType() != "use")
+                {
+                    cout << "There's no way to use this item." << endl;
+                }
+                else
+                {
+                    if(goodLocation)
+                    {
+                        cout << temp->info->getActiveMessage() << endl;
+                        dealWithRules(temp->info->getItemUseRules(), mapptr);
+                    }
+                    else if(!goodLocation)   //not the right room
+                    {
+                        cout << "This might work in another location, but not here." << endl;
+                    }
+                }
+            }
+        }
+
+        void dealWithRules(vector<Rule*> rules, Map* mapptr)
+        {
+            for(int i = 0; i < rules.size(); i++)
+            {
+                mapptr->updateRule(rules[i]);
+            }
         }
 };

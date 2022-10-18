@@ -10,6 +10,10 @@ class ConsumeItem : public Item
     private:
         vector<Effect*> effectVec;
     public:
+        ConsumeItem()
+        {
+            type = "consume";
+        }
         void setActiveMessage(string s)
         {
             activeMessage = s;
@@ -18,6 +22,11 @@ class ConsumeItem : public Item
         string getActiveMessage()
         {
             return activeMessage;
+        }
+
+        vector<Effect*> getItemConsumeEffects()
+        {
+            return effectVec;
         }
 
         void setActiveArea(int a)

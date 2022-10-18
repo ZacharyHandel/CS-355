@@ -99,6 +99,12 @@ class Item
             return blank;
         }
 
+        virtual vector<Effect*> getItemConsumeEffects()
+        {
+            vector<Effect*> blank;
+            return blank;
+        }
+
         virtual void addEffect(Effect* temp)
         {
             //shouldn't ever call this method directly

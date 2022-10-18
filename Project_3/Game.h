@@ -94,7 +94,7 @@ class Game{
 				}
 				else if(userInput == "consume")
 				{
-					//player1->consume(/*Some Argument*/);
+					player1->consume(map);
 				}
 				else if(userInput == "stats")
 				{

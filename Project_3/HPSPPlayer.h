@@ -49,12 +49,6 @@ class HPSPPlayer : public Player
             cout << "Sanity Points: " << sp << endl;
         }
 
-
-		void consume(Map* mapptr)
-        {
-          
-        }
-
 		void use(Map* mapptr)
         {
             bool found = false;
@@ -185,6 +179,90 @@ class HPSPPlayer : public Player
             for(int i = 0; i < rules.size(); i++)
             {
                 mapptr->updateRule(rules[i]);
+            }
+        }
+
+        void consume(Map* mapptr)
+        {
+            bool found = false;
+            bool goodLocation = false;
+            string n;
+
+            nodeType<Item*>* temp = items.getFirst();
+
+            cout << "Outside of detecting item in inventory***" << endl;
+            if(temp == NULL)
+            {
+                cout << "Inside temp == NULL***" << endl;
+                cout << "You have no items in your inventory." << endl;
+            }
+            else
+            {
+                cout << "Consume what item?" << endl;
+                getline(cin, n);
+
+                while(temp != NULL && found == false)
+                {  
+                    cout << "Inside While Loop***" << endl;
+                    cout << "THIS IS THE ITEM IN THE SEARCH: " << temp->info->getName() << endl;
+                    if(n == temp->info->getName())
+                    {
+                        cout << "Inside if n is getName***" << endl;
+                        found = true;
+                        if(temp->info->getActiveArea() == 0 || temp->info->getActiveArea() == mapptr->reverseLookUp(currentLocation))
+                        {
+                            cout << "Inside if active area**" << endl;
+                            goodLocation = true;
+                            //break;
+                        }
+                    }
+                    else
+                    {
+                        temp=temp->link;
+                        //break;
+                    }
+
+                    if(found == true)
+                    {
+                        cout << "SET FOUND TO TRUE****" << endl;
+                    }
+                }
+
+                if(!found)
+                {
+                    cout << "No item by that name in your inventory." << endl;
+                }
+                else if(temp->info->getType() != "consume")
+                {
+                    cout << "That proves impossible" << endl;
+                }
+                else
+                {
+                    if(goodLocation)
+                    {
+                        cout << temp->info->getActiveMessage() << endl;
+                        dealWithEffects(temp->info->getItemConsumeEffects());
+                    }
+                    else if(!goodLocation)
+                    {
+                        cout << "That might work in another location, but not here." << endl;
+                    }
+                }
+            }
+        }
+
+        void dealWithEffects(vector<Effect*> effects)
+        {
+            for(int i = 0; i < effects.size(); i++)
+            {
+                if(effects[i]->effectID == 0)
+                {
+                    hp-=effects[i]->effectAmt;
+                }
+                else
+                {
+                    hp+=effects[i]->effectAmt;
+                }
             }
         }
 };

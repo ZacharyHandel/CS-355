@@ -115,7 +115,13 @@ class MapV2 : public Map
           				getline(ss, xstr, ',');
 						tempNodePtr->info.setGoal(atoi(xstr.c_str()));
 				}
-				else if(nextToken == "</desc>" || nextToken == "</feats>"){
+				else if(nextToken == "<combat>")
+				{
+					parser.eatToken();
+					nextToken = parser.getNext();
+					makeCombatArea(stoi(nextToken));	//TESTING FOR COMBAT AREA
+				}
+				else if(nextToken == "</desc>" || nextToken == "</feats>" || nextToken == "</combat>"){
 				  //do nothing
 				}
 				else{
@@ -141,7 +147,22 @@ class MapV2 : public Map
                     areasVec[itemVec[i]->getSR() -1]->info.items.insertLast(itemVec[i]);
                 }
         }
-
+		
+		void makeCombatArea(int i)
+		{
+			if(i == 1)
+			{
+				cout << "This is a combat area." << endl;
+			}
+			else if(i == 0)
+			{
+				cout << "This is not a combat area." << endl;
+			}
+			else
+			{
+				cout << "Invalid value inside <combat> tags." << endl;
+			}
+		}
 
         void makeItem()
         {

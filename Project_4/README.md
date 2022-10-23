@@ -2,3 +2,4 @@ This is the final project in my Data Structures and Algorithms Class. There are 
 Our tasks include the following:
 - Impliment 3 new features to the Interactional Fiction Game Engine written by Dr. Daniel Ray.
 - These features we are creating include a bag system, a UI system, and a combat system.
+![](https://media.giphy.com/media/2wgWwge6IBWl7E7pxj/giphy.gif)

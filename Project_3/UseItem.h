@@ -10,7 +10,10 @@ class UseItem : public Item
     private:
         vector<Rule*> rulesVec;
     public:
-
+        UseItem()
+        {
+            type = "use";
+        }
 
         void setActiveMessage(string s)
         {

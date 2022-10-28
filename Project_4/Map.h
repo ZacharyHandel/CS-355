@@ -24,6 +24,7 @@ struct areaNode
 	areaNode *r;
 };
 
+
 class Map{
 	protected:
 		vector<areaNode*> areasVec;

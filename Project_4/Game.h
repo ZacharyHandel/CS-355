@@ -1,4 +1,6 @@
 #include "MapV2.h"
+#include "Combat.h"
+
 //#include "Player.h"
 
 #ifndef ullItem
@@ -11,29 +13,31 @@ class Game{
 	protected:
 		MapV2* map = new MapV2;
 		Player* player1;
+		Combat* combat;
   	public:
 		Game(){
-			//cout << "Setting current area to the start of the map***" << endl;
-			//cout << map->getStart() << endl;
 			player1 = map->getPlayer();
 			player1->setCurrent(map->getStart());
-			//cout << "Getting player type***" << endl;
 			
 		}	
     
   		void play()
 		{
-			//cout << "inside play***" << endl;
       		string userInput;
-			//cin.ignore();
       		while(true)
-			{	
-				//cout << "inside while(true)***" << endl;			
+			{		
 				//check game status
 				if(player1->isGameOver() != 0){
-					//cout << "inside if player1's game over is not 0***" << endl;
 					player1->getCurrent()->info.displayArea();
-					return;
+					return;	// END THE GAME HERE
+				}
+				//CHECK FOR COMBAT HERE
+
+				//if combatID == 1
+				if(player1->getCurrent()->info.getCombatID() == 1)
+				{
+						combat->displayCombatMessage();
+						combat->engageCombat(player1);
 				}
 					//display area data
 				if(player1->playerMoved()){
@@ -63,7 +67,6 @@ class Game{
 					player1->setCurrent(player1->getCurrent()->r);
 				}
 				else if(userInput == "iseedeadpeople"){ //issdeadpeople cheat code to reveal map
-					//map.print();
 					cout<<map;
 				}
 				else if(userInput == "reset"){

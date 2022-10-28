@@ -10,6 +10,11 @@ class BasicPlayer : public Player
         //no new private attributes
     public:
 
+        int getHP()
+        {
+            return -1;
+        }
+
         int isGameOver()
         {
             if(currentLocation->info.getID() == 1)
@@ -107,5 +112,11 @@ class BasicPlayer : public Player
             {
                 mapptr->updateRule(rules[i]);
             }
+        }
+
+        void takeCombatDamage()
+        {
+            //impliment basic player combat
+            cout << "THIS IS A TEMPORARY DEBUG***" << endl;
         }
 };

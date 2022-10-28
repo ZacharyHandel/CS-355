@@ -7,6 +7,7 @@ using namespace std;
 #include "BasicPlayer.h"
 #include "HPSPPlayer.h"
 #endif
+
 class MapV2 : public Map
 {
     protected:
@@ -119,7 +120,7 @@ class MapV2 : public Map
 				{
 					parser.eatToken();
 					nextToken = parser.getNext();
-					makeCombatArea(stoi(nextToken));	//TESTING FOR COMBAT AREA
+					tempNodePtr->info.setCombatID(stoi(nextToken));
 				}
 				else if(nextToken == "</desc>" || nextToken == "</feats>" || nextToken == "</combat>"){
 				  //do nothing
@@ -148,7 +149,7 @@ class MapV2 : public Map
                 }
         }
 		
-		void makeCombatArea(int i)
+		void makeCombatAreaTESTFUNCTION(int i)
 		{
 			if(i == 1)
 			{

@@ -18,6 +18,7 @@
 	<area>
 		<desc>You're lost in the Heart of the Dungeon.  Don't get eaten.</desc>
 		<feats>0,0</feats>
+		<combat>0</combat>
 	</area>
       
     <item>
@@ -51,6 +52,7 @@
 	<area>
 		<desc>Castle Tower.  Put some other descriptive text here.
 		<feats>0,0</feats>
+		<combat>1</combat>
 	</area>
 
 	<item>
@@ -109,12 +111,14 @@
 	<area>
 		<desc>DRAGON!!!  You made a FANTASTIC snack!</desc>
 		<feats>1,0</feats>
+		<combat>1</combat>
 	</area>
 
 % Area4
 	<area>
 		<desc>Dragon's Lair: At least there's no dragon here.</desc>
 		<feats>0,0</feats>
+		<combat>1</combat>
 	</area>
 
 	<item>
@@ -129,6 +133,7 @@
 	<area>
 		<desc>Dragon's Breath: The air is so noxious here you can barely breath, or even SEE!</desc>
 		<feats>0,0</feats>
+		<combat>1</combat>
 	</area>
 
 	<item>
@@ -146,12 +151,14 @@
 	<area>
 		<desc>Just another empty room.</desc>
 		<feats>0,0</feats>
+		<combat>1</combat>
 	</area>
 
 % Area 7
 	<area>
 		<desc>Escape!  Fresh air!  You didn't die!  Great.  Good for you.</desc>
 		<feats>0,1</feats>
+		<combat>1</combat>
 	</area>
 
 	<links>

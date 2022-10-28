@@ -3,13 +3,19 @@
     #include "Player.h"
     //#include "Map.h"
 #endif
+#include <time.h>
 
 class HPSPPlayer : public Player
 {
-    private:
+    protected:
         int hp = 100; //hit point
         int sp = 100; //sanity points
     public:
+
+        int getHP()
+        {
+            return hp;
+        }
 
         int isGameOver()
         {
@@ -32,9 +38,17 @@ class HPSPPlayer : public Player
             else
             {
                 return 0;
-            }
-            
+            } 
 
+        }
+
+
+        //take damage from combat
+        void takeCombatDamage()
+        {
+            srand(time(NULL));
+            int randomDamage = rand() % 20 + 1;
+            hp -= randomDamage;
         }
 
 		void resetPlayerStats()

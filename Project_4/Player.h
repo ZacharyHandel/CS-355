@@ -211,6 +211,8 @@ class Player{
 		virtual void reportStats() = 0;
 		virtual void consume(Map* mapptr) = 0;
 		virtual void use(Map* mapptr) = 0;
+		virtual void takeCombatDamage() = 0;
+		virtual int getHP() = 0;
 
 	protected:
 		areaNode* currentLocation;	//create 2 areaNode pointers for the current location and the last location

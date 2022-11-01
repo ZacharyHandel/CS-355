@@ -115,6 +115,11 @@ class Game{
 					cout<<"\t stats: to report players stats,"<<endl;			
 					cout<<"\t reset: to reset the game,"<<endl;
 					cout<<"\t exit: to exit the game."<<endl;
+					cout << endl << endl;
+					cout << "Combat Rules: " << endl;
+					cout << "You are given 3 options to type (1, 2, or 3)." << endl;
+					cout << "At random, if you choose the correct number, you will deal damage to the enemy." << endl;
+					cout << "However, if you choose the wrong number, you take damage." << endl;
 					cout<<endl;
 				}
 				else{

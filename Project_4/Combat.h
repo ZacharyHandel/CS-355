@@ -77,7 +77,7 @@ class Combat
                 }
                 else if(combatChoice != randomCombatValue)
                 {
-                    cout << "DEBUG FOR IF COMBAT CHOICE DOES NOT EQUAL RANDOMCOMBAT***" << endl;
+                   // cout << "DEBUG FOR IF COMBAT CHOICE DOES NOT EQUAL RANDOMCOMBAT***" << endl;
                     hit = true;
                 }
                 else

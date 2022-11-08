@@ -15,6 +15,16 @@ using namespace std;
 
 class Area{
   public:
+
+    /******************************
+  	ASCII GRAPHICS: initialize type
+  	******************************/
+  	Area()
+  	{
+  		type = "basic";
+	}
+	//END OF: initialize type
+
     void setDescription (string desc){
     	description = desc;
     }
@@ -39,11 +49,6 @@ class Area{
 	return goal;
     }
 
-    void displayArea(){
-	cout<<description<<endl;		
-    }
-
-
     /********************************************
      COMBAT SYSTEM: CREATEING SETTERS AND GETTERS
     ********************************************/
@@ -57,6 +62,18 @@ class Area{
         return combatID;
     }
     
+    /********************************************************
+    ASCII GRAPHICS: Necessary method alterations/declerations
+    ********************************************************/
+    virtual void displayArea(){
+	cout<<description<<endl;		
+    }
+    
+    virtual void setImage(string s)
+    {
+    	cout << "DEBUG WARNING: Objects of the Area (basic area) class don't have images. \n";
+	}
+	//END OF: Necessary method alterations/declerations
     
     uLList<Item*> items;
 
@@ -80,7 +97,7 @@ class Area{
     }
 
     
-  private:
+  protected:
      string description;
      bool instadeath;
      bool goal;	
@@ -88,6 +105,11 @@ class Area{
       COMBAT SYSTEM: SETTING COMBAT ID ATTRIBUTE
      ************************************/
      bool combatID;
+     /*******************
+     ASCII GRAPHICS: type
+     *******************/
+     string type;
+     //END OF: type
 };
 
 #endif

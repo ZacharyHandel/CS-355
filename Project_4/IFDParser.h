@@ -35,7 +35,31 @@ class IFDParser{
 		while(!inFile.eof()){
 			getline(inFile, nextLine);
 			trim(nextLine);
-		        c=nextLine[0];
+
+			/*********************************
+			ASCII GRAPHICS: Tokenizing Images
+			*********************************/
+			if(nextLine == "<image>")
+			{
+				token = "\n";
+				tokenVec.push_back(nextLine);
+				getline(inFile, nextLine);
+				while(nextLine.find("</image>") == string::npos)
+				{
+					token = token + nextLine;
+					token = token + "\n";
+					getline(inFile, nextLine);
+				}
+				tokenVec.push_back(token);
+				trim(nextLine);
+				tokenVec.push_back(nextLine);
+				getline(inFile, nextLine);
+				trim(nextLine);
+				token = "";
+			}
+			//END OF: Tokenizing Images
+
+		    c=nextLine[0];
 
 			//dump any comment or blank line (all comments exist alone on their lines)
 			if(c=='%' || nextLine == ""){

@@ -8,6 +8,17 @@ using namespace std;
 #include "HPSPPlayer.h"
 #endif
 
+/**********************************************
+ASCII GRAPHICS: Graphical Item File Inclusions
+**********************************************/
+#ifndef GRAPHICAL_ITEMS
+#define GRAPHICAL_ITEMS
+	#include "GraphicalConsumeItem.h"
+	#include "GraphicalUseItem.h"
+	#include "GraphicalBasicItem.h"
+#endif
+//END OF: Graphical Item File Inclusions
+
 class MapV2 : public Map
 {
     protected:
@@ -96,7 +107,7 @@ class MapV2 : public Map
 
 
 		}//constructor
-
+/*
     void makeArea(){
 			int id;
 			int goal;
@@ -121,10 +132,11 @@ class MapV2 : public Map
           				getline(ss, xstr, ',');
 						tempNodePtr->info.setGoal(atoi(xstr.c_str()));
 				}
-				
+
 				/********************************************
 				 COMBAT SYSTEM: CREATING NEW PARSER TAG
 				********************************************/
+			/*
 				else if(nextToken == "<combat>")
 				{
 					parser.eatToken();
@@ -150,12 +162,164 @@ class MapV2 : public Map
 			areasVec.push_back(tempNodePtr);
 
 		} //end makeArea()
+*/
+
+	/***************************************************************************
+	ASCII GRAPHICS: makeArea
+	****************************************************************************/
+	void makeArea()
+	{
+		while(nextToken != "</area>")
+		{
+			if(nextToken == "<basic>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeBasicArea();
+			}
+			else if(nextToken == "<graphical>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeGraphicalArea();
+			}
+			else if(nextToken == "</basic>" || nextToken == "</graphical>")
+			{
+				// Do jack
+			}
+			else
+			{
+				cout<<"Parse Error Location 2"<<endl;
+				ifderr = true;
+				break;
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}
+	}//END OF: makeArea
+
+	/***************************************************************************
+	ASCII GRAPHICS: makeBasicArea
+	***************************************************************************/
+	void makeBasicArea()
+	{
+		int id;
+		int goal;
+		string xstr;
+		
+		areaNode* tempNodePtr = new areaNode;
+		tempNodePtr->info = new Area;
+		
+		while(nextToken != "</basic>"){
+			if(nextToken == "<desc>"){
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempNodePtr->info->setDescription(nextToken);
+			}
+			/********************************************
+			 COMBAT SYSTEM: CREATING NEW PARSER TAG
+			********************************************/
+			else if(nextToken == "<combat>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempNodePtr->info->setCombatID(stoi(nextToken));	//set combat ID
+				combatVec.push_back(stoi(nextToken));	//push to vector
+			}
+			else if(nextToken == "<feats>"){
+				parser.eatToken();
+				nextToken = parser.getNext();
+
+				istringstream ss(nextToken);
+          		getline(ss, xstr, ',');
+          		tempNodePtr->info->setID(atoi(xstr.c_str()));
+
+          		getline(ss, xstr, ',');
+				tempNodePtr->info->setGoal(atoi(xstr.c_str()));
+			}
+			else if(nextToken == "</desc>" || nextToken == "</feats>" || nextToken == "</combat>"){
+				//do nothing
+			}
+			else{
+				cout<<"Parse Error Location 3"<<endl;
+				ifderr = true;
+				break;
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}//while !</area>
+
+		//add area to vector
+		areasVec.push_back(tempNodePtr);
+	}//END OF: makeBasicArea
+
+	/***************************************************************************
+	ASCII GRAPHICS: makeGraphicalArea
+	***************************************************************************/
+	void makeGraphicalArea()
+	{
+		int id;
+		int goal;
+		string xstr;
+		
+		areaNode* tempNodePtr = new areaNode;
+		tempNodePtr->info = new GraphicalArea;
+		
+		while(nextToken != "</graphical>"){
+			if(nextToken == "<desc>"){
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempNodePtr->info->setDescription(nextToken);
+			}
+			else if(nextToken == "<image>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempNodePtr->info->setImage(nextToken);
+			}
+			/********************************************
+			COMBAT SYSTEM: CREATING NEW PARSER TAG
+			********************************************/
+			else if(nextToken == "<combat>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempNodePtr->info->setCombatID(stoi(nextToken));	//set combat ID
+				combatVec.push_back(stoi(nextToken));	//push to vector
+			}
+			else if(nextToken == "<feats>"){
+				parser.eatToken();
+				nextToken = parser.getNext();
+
+				istringstream ss(nextToken);
+          		getline(ss, xstr, ',');
+          		tempNodePtr->info->setID(atoi(xstr.c_str()));
+
+          		getline(ss, xstr, ',');
+				tempNodePtr->info->setGoal(atoi(xstr.c_str()));
+			}
+			else if(nextToken == "</desc>" || nextToken == "</feats>" || nextToken == "</image>" || nextToken == "</combat>"){
+				//do nothing
+			}
+			else{
+				cout<<"Parse Error Location 3"<<endl;
+				ifderr = true;
+				break;
+			}
+
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}//while !</area>
+
+		//add area to vector
+		areasVec.push_back(tempNodePtr);
+	}//END OF: makeGraphicalArea
 
         void insertItem()
         {
                 for(int i = 0; i < itemVec.size(); i++)
                 {
-                    areasVec[itemVec[i]->getSR() -1]->info.items.insertLast(itemVec[i]);
+                    areasVec[itemVec[i]->getSR() -1]->info->items.insertLast(itemVec[i]);
                 }
         }
 		
@@ -175,43 +339,65 @@ class MapV2 : public Map
 			}
 		}
 
-        void makeItem()
-        {
-            //Item* tempPointer = new Item;
-            while(nextToken != "</item>")
-            {
-				//cout << "Inside Item While***" << endl;
-				if(nextToken == "<use>")
-				{
-					//cout << "Inside of <use>***" << endl;
-					parser.eatToken();
-					nextToken = parser.getNext();
-					//cout << "Making UseItem()***" << endl;
-					makeUseItem();
-				}	//end of if use
-				else if(nextToken == "<basic>")
-				{
-					//cout << "Inside of <basic>***" << endl;
-					parser.eatToken();
-					nextToken = parser.getNext();
-					makeBasicItem();
-				}//end of if basic
-				else if(nextToken == "<consume>")
-				{
-					parser.eatToken();
-					nextToken = parser.getNext();
-					makeConsumeItem();
-				}
-				else
-				{
-					cout << "Parse Error Location 2" << endl;
-					ifderr = true;
-					break;
-				}
+    /***************************************************************************
+	ASCII GRAPHICS: void makeItem
+	***************************************************************************/
+	void makeItem()
+	{	
+		while(nextToken != "</item>")
+		{
+			if(nextToken == "<use>")
+			{
 				parser.eatToken();
 				nextToken = parser.getNext();
-            }
-        }
+				makeUseItem();
+			}
+			else if(nextToken == "<consume>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeConsumeItem();
+			}
+			else if(nextToken == "<basic>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeBasicItem();
+			}
+			else if(nextToken == "<graphicaluse>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeGraphicalUseItem();
+			}
+			else if(nextToken == "<graphicalconsume>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeGraphicalConsumeItem();
+			}
+			else if(nextToken == "<graphicalbasic>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				makeGraphicalBasicItem();
+			}
+			else if(nextToken == "</use>" || nextToken == "</consume>" || nextToken == "</basic>" || nextToken == "</graphicaluse>" || nextToken == "</graphicalconsume>" || nextToken == "</graphicalbasic>")
+			{
+				// do jack
+			}
+			else 
+			{
+				cout<<"Parse Error Location 2"<<endl;
+				ifderr = true;
+				break;
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}
+		//add item to vector (put this in the specific make methods
+		//itemVec.push_back(tempItemPtr);
+	}//END OF: makeItem
 
 		void makeUseItem()
 		{
@@ -302,6 +488,85 @@ class MapV2 : public Map
 			itemVec.push_back(tempItemPointer);
 		}
 
+	/***************************************************************************
+	ASCII GRAPHICS: makeGraphicalUseItem
+	***************************************************************************/
+	void makeGraphicalUseItem()
+	{
+		Item* tempItemPtr = new GraphicalUseItem;
+		
+		while(nextToken != "</graphicaluse>")
+		{
+			if(nextToken == "<name>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setName(nextToken);
+			}
+			else if(nextToken == "<desc>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setDesc(nextToken);
+			}
+			else if(nextToken == "<image>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setImage(nextToken);
+			}
+			else if(nextToken == "<star>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setSR(stoi(nextToken));
+			}
+			else if(nextToken == "<actmess>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setActiveMessage(nextToken);
+			}
+			else if(nextToken == "<actar>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setActiveArea(stoi(nextToken));
+			}
+			else if(nextToken == "<rule>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				
+				Rule* ruleTemp = new Rule;
+				string xstr;
+				
+				istringstream ss(nextToken);
+        		getline(ss, xstr, ',');
+        		ruleTemp->beginRm = atoi(xstr.c_str());
+        		getline(ss, xstr, ',');
+        		ruleTemp->direction = *xstr.c_str();
+        		getline(ss, xstr, ',');
+        		ruleTemp->destRm = atoi(xstr.c_str());
+        		
+        		tempItemPtr->addRule(ruleTemp);
+			}
+			else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</image>" || nextToken == "</star>" || nextToken == "</actmess>" || nextToken == "</actar>" || nextToken == "</rule>")
+			{
+				// Do Jack
+			}
+			else
+			{
+				cout<<"Parse Error Location 3"<<endl;
+				ifderr = true;
+				break;
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}
+		itemVec.push_back(tempItemPtr); 
+	}//END OF: makeGraphicalUseItem
+
 		void makeBasicItem()
 		{
 			Item* tempPointer = new Item;
@@ -341,6 +606,57 @@ class MapV2 : public Map
 			}
 			itemVec.push_back(tempPointer);
 		}
+
+	/***************************************************************************
+	ASCII GRAPHICS: makeGraphicalBasicItem
+	***************************************************************************/
+	void makeGraphicalBasicItem()
+	{
+		Item* tempItemPtr = new GraphicalBasicItem;
+		
+		while(nextToken != "</graphicalbasic>")
+		{
+			if(nextToken == "<name>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setName(nextToken);
+			}
+			else if(nextToken == "<desc>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setDesc(nextToken);
+			}
+			else if(nextToken == "<image>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setImage(nextToken);
+			}
+			else if(nextToken == "<star>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setSR(stoi(nextToken));
+			}
+			else if(nextToken == "</name>" || nextToken == "</image>" || nextToken == "</desc>" || nextToken == "</star>")
+			{
+				// Do jack
+			}
+			else
+			{
+				cout<<"Parse Error Location 2"<<endl;
+				ifderr = true;
+				break;
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}//while !</item>
+		
+		//add item to vector
+		itemVec.push_back(tempItemPtr);
+	}//END OF: makeGraphicalBasicItem
 
 		void makeConsumeItem()
 		{
@@ -408,11 +724,88 @@ class MapV2 : public Map
 			itemVec.push_back(tempItemPointer);
 		}
 
+	/***************************************************************************
+	ASCII GRAPHICS: makeGraphicalConsumeItem
+	***************************************************************************/
+	void makeGraphicalConsumeItem()
+	{
+		Item* tempItemPtr = new GraphicalConsumeItem;
+		
+		while(nextToken != "</graphicalconsume>")
+		{
+			if(nextToken == "<name>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setName(nextToken);
+			}
+			else if(nextToken == "<desc>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setDesc(nextToken);
+			}
+			else if(nextToken == "<image>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setImage(nextToken);
+			}
+			else if(nextToken == "<star>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setSR(stoi(nextToken));
+			}
+			else if(nextToken == "<actmess>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setActiveMessage(nextToken);
+			}
+			else if(nextToken == "<actar>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				tempItemPtr->setActiveArea(stoi(nextToken));
+			}
+			else if(nextToken == "<effect>")
+			{
+				parser.eatToken();
+				nextToken = parser.getNext();
+				
+				Effect* effectTemp = new Effect;
+				string xstr;
+				
+				istringstream ss(nextToken);
+        		getline(ss, xstr, ',');
+        		effectTemp->effectID = atoi(xstr.c_str());
+        		getline(ss, xstr, ',');
+        		effectTemp->effectAmt = atoi(xstr.c_str());
+        		
+        		tempItemPtr->addEffect(effectTemp);
+			}
+			else if(nextToken == "</name>" || nextToken == "</desc>" || nextToken == "</image>" || nextToken == "</star>" || nextToken == "</actmess>" || nextToken == "</actar>" || nextToken == "</effect>")
+			{
+				// Do Jack
+			}
+			else
+			{
+				cout<<"Parse Error Location 3"<<endl;
+				ifderr = true;
+				break;
+			}
+			parser.eatToken();
+			nextToken = parser.getNext();
+		}
+		itemVec.push_back(tempItemPtr);
+	}//END OF: makeGraphicalConsumeItem
+
         void resetItems()
         {
             for(int i = 0; i < areasVec.size(); i++)
             {
-                areasVec[i]->info.items.destroyList();
+                areasVec[i]->info->items.destroyList();
             }
         }
 
@@ -420,7 +813,7 @@ class MapV2 : public Map
 		{
 			for(int i = 0; i < areasVec.size(); i++)
 			{
-				areasVec[i]->info.setCombatID(combatVec[i]);	//RESET COMBAT VALUES
+				areasVec[i]->info->setCombatID(combatVec[i]);	//RESET COMBAT VALUES
 			}
 		}
 
@@ -465,11 +858,11 @@ class MapV2 : public Map
 			output<<"******************************************************************"<<endl;
 			for(int i=0; i<map.areasVec.size(); i++){
 				cout<<"This is area: "<<i+1<<endl;
-				cout<<map.areasVec[i]->info.getDescription()<<endl;
-				if(map.areasVec[i]->info.getID() == 1){
+				cout<<map.areasVec[i]->info->getDescription()<<endl;
+				if(map.areasVec[i]->info->getID() == 1){
 					cout<<"Area is INSTADEATH."<<endl;
 				}
-				if(map.areasVec[i]->info.getGoal() == 1){
+				if(map.areasVec[i]->info->getGoal() == 1){
 					cout<<"Area is GOAL."<<endl;
 				}
 				output<<"Connections:"<<endl;
@@ -483,8 +876,8 @@ class MapV2 : public Map
 			output<<"******************************************************************"<<endl;
             for(int i = 0; i < map.areasVec.size(); i++)
             {
-                output << "Items for area " << i + 1 << ": " << map.areasVec[i]->info.getDescription() << endl;
-                map.areasVec[i]->info.items.printNames();
+                output << "Items for area " << i + 1 << ": " << map.areasVec[i]->info->getDescription() << endl;
+                map.areasVec[i]->info->items.printNames();
             }
             return output;
         }

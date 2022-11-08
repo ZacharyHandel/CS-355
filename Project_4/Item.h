@@ -111,6 +111,20 @@ class Item
             cout << "DEBUG WARNING: Object of the Item (basic items) class don't have associated rules." << endl;
         }
 
+        /****************************
+		ASCII GRAPHICS: Image Methods
+		****************************/
+		virtual void setImage(string s)
+		{
+			cout << "DEBUG WARNING: Objects of the Item (basic items) class don't have images. \n";
+		}
+		
+		virtual void displayImage()
+		{
+			cout << "DEBUG WARNING: Objects of the Item (basic items) class don't have images. \n";
+		}
+		//END: Image Methods
+
         friend ostream& operator<<(ostream&, Item&);
 
     protected:

@@ -1,0 +1,206 @@
+<game>
+	<ptype>hpsp</ptype>
+
+	% Area1
+	<area>
+		<desc>You are stuck at a street intersection in the middle of Atlanta, Georgia. </desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+
+	% Area2
+	<area>
+		<desc>A car. There might be supplies inside of it.</desc>
+		<feats>0,0</feats>
+		<combat>1</combat>
+	</area>
+
+	<item>
+		<use>
+			<name>Pliers</name>	
+			<desc>A rusty pair of pliers. They are covered in blood.</desc>
+			<star>2</star>
+			<actmess>You break through a gate located behind the dumpster.</actmess>
+			<actar>3</actar>
+			<rule>3,r,6</rule>
+		</use>
+	</item>
+
+	% Area3
+	<area>
+		<desc>A dumpster. It smells better than the walker infested streets, however.</desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+	
+	<item>
+		<use>
+			<name>Crowbar</name>
+			<desc>A heavy crowbar. It looks unused, but what was someone planning to use it for?</desc>
+			<star>3</star>
+			<actmess>You break open the door to a city building in hopes to escape from the walkers on the streets.</actmess>
+			<actar>1</actar>
+			<rule>1,d,5</rule>
+		</use>
+	</item>
+
+	% Area4
+	<area>
+		<desc>You try running west for Huntsville, but you are overtaken by walkers. Try again.</desc>
+		<feats>1,0</feats>
+		<combat>0</combat>
+	</area>
+
+	% Area5
+	<area>
+		<desc>City building. You enter the building in an attempt to flea from the walkers outside.</desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+
+	% Area6
+	<area>
+		<desc>Apartment Building. This was onced owned by a family; you see the pictures on the coffee table.</desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+
+	<item>
+		<use>
+			<name>Ladder Step</name>
+			<desc>A missing ladder step. Its covered in trash and sut.</desc>
+			<star>6</star>
+			<actmess>You place the ladder step in the missing spot.</actmess>
+			<actar>3</actar>
+			<rule>3,d,7</rule>
+		</use>
+	</item>
+
+	% Area7
+	<area>
+		<desc>Roof of a building. You take a ladder to the roof of a city building to hopefully find some safety.</desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+
+	% Area8
+	<area>
+		<desc>You look over the edge of the city building to try and survey the area. A hoard of walkers then chases you off the edge and you fall to your death. Try again.</desc>
+		<feats>1,0</feats>
+		<combat>0</combat>
+	</area>
+
+	% Area9
+	<area>
+		<desc>Apartment bedroom. You notice its a teenagers room and there is a picture of them with their first car.</desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+
+	<item>
+		<use>
+			<name>Car Keys</name>
+			<desc>These are the car keys to the kid who got his first car.</desc>
+			<star>9</star>
+			<actmess>You use the keys on the car. With a little elbow grese, it starts up, but it attracts a hoard of walkers.</actmess>
+			<actar>2</actar>
+			<rule>2,r,10</rule>
+		</use>
+	</item>
+
+	% Area10
+	<area>
+		<desc>You make your way down the highway. You decide heading west is your best option because you know of a military base located in Huntsville. You drive off to the sunset leaving the walkers of Atlanta behind you. Stay tuned for IFD TWD Chapter 2.</desc>
+		<feats>0,1</feats>
+		<combat>0</combat>
+	</area>
+
+	% Area11
+	<area>
+		<desc>Food pantry. Your mouth waters at all the options!</desc>
+		<feats>0,0</feats>
+		<combat>1</combat>
+	</area>
+
+	<item>
+		<consume>
+			<name>Can of Beans</name>
+			<desc>The can of beans seem to be expired, but what other options are there?</desc>
+			<star>11</star>
+			<actmess>Not much help, but you do feel a bit replenished.</actmess>
+			<actar>11</actar>
+			<effect>1,10</effect>
+		</consume>
+	</item>
+
+	<item>
+		<consume>
+			<name>Can of Chicken</name>
+			<desc>This is a fresh can of chicken.</desc>
+			<star>11</star>
+			<actmess>You find this refreshing.</actmess>
+			<actar>11</actar>
+			<effect>1,15</effect>
+		</consume>
+	</item>
+
+	<item>
+		<consume>
+			<name>Jar of Pickles.</name>
+			<desc>There seems to be mold in the jar of pickles.</desc>
+			<star>11</star>
+			<actmess>You feel sick to your stomach after eating that.</actmess>
+			<actar>11</actar>
+			<effect>0,20</effect>
+		</consume>
+	</item>
+
+	% Area12
+	<area>
+		<desc>Dead survivor. You notice he was packing for an escape.</desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</area>
+
+	<item> 
+		<basic> 
+			<name>Bag</name> 
+			<desc>This is a bag... you can now carry more items!</desc> 
+			<star>12</star> 
+		</basic> 
+	</item> 
+
+	% Area13
+	<area>
+		<desc>Hospital. You see walkers with scrubs and lab coats on.</desc>
+		<feats>0,0</feats>
+		<combat>1</combat>
+	</area>
+
+	<item>
+		<consume>
+			<name>Bandage</name>
+			<desc>I am stuck on Band-Aid brand 'cause Band-Aid's stuck on me.</desc>
+			<star>13</star>
+			<actmess>You feel much better</actmess>
+			<actar>13</actar>
+			<effect>1,25</effect>
+		</consume>
+	</item>
+	
+	<links>
+		<linkset>2,1,4,3</linkset>
+		<linkset>2,1,13,2</linkset>
+		<linkset>3,3,1,3</linkset>
+		<linkset>4,4,4,1</linkset>
+		<linkset>1,5,11,5</linkset>
+		<linkset>6,9,3,6</linkset>
+		<linkset>3,12,7,8</linkset>
+		<linkset>8,8,7,8</linkset> 
+		<linkset>6,9,9,9</linkset>
+		<linkset>10,10,2,10</linkset>
+		<linkset>11,11,11,5</linkset>
+		<linkset>7,12,12,12</linkset>
+		<linkset>13,13,13,2</linkset>
+	</links>
+</game>

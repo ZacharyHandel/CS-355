@@ -13,11 +13,22 @@
 //#include "Item.h"
 #endif
 
+/***************************************
+ASCII GRAPHICS: Graphical Area Inclusion
+***************************************/
+#include "GraphicalArea.h"
+//END: Graphical Area Inclusion
+
 using namespace std;
 
 struct areaNode
 {
-	Area info;
+	/***************************
+	ASCII GRAPHICS: Area pointer
+	***************************/
+	Area *info;
+	//END OF: Area pointer
+
 	areaNode *u;
 	areaNode *d;
 	areaNode *l;
@@ -42,7 +53,10 @@ class Map{
 	public:
 		//Map();
 
-		void makeArea(){
+		/************************************
+		ASCII GRAPHICS: makeArea() to virtual
+		************************************/
+		virtual void makeArea(){
 			int id;
 			int goal;
 			string xstr;
@@ -54,7 +68,7 @@ class Map{
 					parser.eatToken();
 					nextToken = parser.getNext();
 
-					tempNodePtr->info.setDescription(nextToken);    //go to the object pointed to by tempNodePtr
+					tempNodePtr->info->setDescription(nextToken);    //go to the object pointed to by tempNodePtr
 				}
 				else if(nextToken == "<feats>"){
 					parser.eatToken();
@@ -62,10 +76,10 @@ class Map{
 
 					istringstream ss(nextToken);
           				getline(ss, xstr, ',');
-          				tempNodePtr->info.setID(atoi(xstr.c_str()));
+          				tempNodePtr->info->setID(atoi(xstr.c_str()));
 
           				getline(ss, xstr, ',');
-					tempNodePtr->info.setGoal(atoi(xstr.c_str()));
+					tempNodePtr->info->setGoal(atoi(xstr.c_str()));
 				}
 				else if(nextToken == "</desc>" || nextToken == "</feats>"){
 				  //do nothing
@@ -203,11 +217,11 @@ class Map{
 			output<<"******************************************************************"<<endl;
 			for(int i=0; i<map.areasVec.size(); i++){
 				cout<<"This is area: "<<i+1<<endl;
-				cout<<map.areasVec[i]->info.getDescription()<<endl;
-				if(map.areasVec[i]->info.getID() == 1){
+				cout<<map.areasVec[i]->info->getDescription()<<endl;
+				if(map.areasVec[i]->info->getID() == 1){
 					cout<<"Area is INSTADEATH."<<endl;
 				}
-				if(map.areasVec[i]->info.getGoal() == 1){
+				if(map.areasVec[i]->info->getGoal() == 1){
 					cout<<"Area is GOAL."<<endl;
 				}
 				output<<"Connections:"<<endl;

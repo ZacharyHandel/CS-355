@@ -24,15 +24,15 @@ class HPSPPlayer : public Player
 
         int isGameOver()
         {
-            if(currentLocation->info.getID() == 1)
+            if(currentLocation->info->getID() == 1)
             {
                 return 2;
             }
-            else if (currentLocation->info.getGoal() == 1)
+            else if (currentLocation->info->getGoal() == 1)
             {
                 return 1;
             }
-            else if(currentLocation->info.getID() == 0 && currentLocation->info.getGoal() == 0)
+            else if(currentLocation->info->getID() == 0 && currentLocation->info->getGoal() == 0)
             {
                 return 0;
             }

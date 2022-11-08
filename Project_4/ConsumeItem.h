@@ -10,10 +10,14 @@ class ConsumeItem : public Item
     private:
         vector<Effect*> effectVec;
     public:
-        ConsumeItem()
-        {
-            type = "consume";
-        }
+    /******************************
+	ASCII GRAPHICS: initialize type
+	******************************/
+	ConsumeItem()
+	{
+		type = "consume";
+	}
+	//END OF: initialize type
         void setActiveMessage(string s)
         {
             activeMessage = s;

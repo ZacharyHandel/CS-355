@@ -1,0 +1,26 @@
+<game>
+	<ptype>hpsp</ptype>
+
+	% Area1
+	<area>
+	<basic>
+		<desc>You are stuck at a street intersection in the middle of Atlanta, Georgia. </desc>
+		<feats>0,0</feats>
+		<combat>0</combat>
+	</basic>
+	</area>
+
+	% Area2
+	<area>
+	<basic>
+		<desc>A car. There might be supplies inside of it.</desc>
+		<feats>0,0</feats>
+		<combat>1</combat>
+	</basic>
+	</area>
+
+	<links>
+		<linkset>2,1,1,1</linkset>
+		<linkset>2,1,2,2</linkset>
+	</links>
+</game>

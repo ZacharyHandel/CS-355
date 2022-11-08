@@ -27,12 +27,12 @@ class Game{
     
   		void play()
 		{
-      		string userInput;
+      		string userInput = "u";
       		while(true)
 			{		
 				//check game status
 				if(player1->isGameOver() != 0){
-					player1->getCurrent()->info.displayArea();
+					player1->getCurrent()->info->displayArea();
 					return;	// END THE GAME HERE
 				}
 
@@ -42,17 +42,17 @@ class Game{
 				/****************************************
 				 COMBAT SYSTEM: CHECK FOR COMBAT ID
 				****************************************/
-				if(player1->getCurrent()->info.getCombatID() == 1)	//If there is combat
+				if(player1->getCurrent()->info->getCombatID() == 1)	//If there is combat
 				{
 						combat->displayCombatMessage();	//display message
 						combat->engageCombat(player1);	//starty combat event
 				}
-					//display area data
-				if(player1->playerMoved()){
-						player1->getCurrent()->info.displayArea();
+				//display area data
+				if(player1->playerMoved() && (userInput == "u" || userInput == "d" || userInput == "l" || userInput == "r")){
+	    				player1->getCurrent()->info->displayArea();
 				}
 				else{
-					if(userInput != "reset"){
+					if(userInput == "u" || userInput == "d" || userInput == "l" || userInput == "r"){
 						cout<<"There appears to be no way to go that direction."<<endl;
 					}
 				}
@@ -85,7 +85,7 @@ class Game{
 					return;
 				}
 				else if(userInput == "search"){
-					player1->getCurrent()->info.search();
+					player1->getCurrent()->info->search();
 				}
 				else if(userInput == "inventory"){
 					player1->inventory();

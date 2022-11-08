@@ -107,7 +107,7 @@ class Combat
                 if(hp <= 0)
                 {
                     cout << "You have defeated the enemy! Please continue on your journey!" << endl;
-                    plr->getCurrent()->info.setCombatID(0); //set combat ID to 0 to disable the combat in this room
+                    plr->getCurrent()->info->setCombatID(0); //set combat ID to 0 to disable the combat in this room
                 }
 
                 if(plr->getHP() <= 0)
@@ -119,7 +119,7 @@ class Combat
             }
             else if(plr->getType() == "basic")
             {
-                plr->getCurrent()->info.setCombatID(0); //basic player will not engage in combat
+                plr->getCurrent()->info->setCombatID(0); //basic player will not engage in combat
             }
         }
 

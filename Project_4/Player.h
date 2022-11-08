@@ -109,7 +109,7 @@ class Player{
 			cout << "Looking for item: " << n << endl;
 
 			nodeType<Item*>* temp = NULL;	//create a nodeType pointer of type Item pointer called temp
-			temp = currentLocation->info.items.getFirst();	//get the first item in the current location
+			temp = currentLocation->info->items.getFirst();	//get the first item in the current location
 
 
 			/***************************************
@@ -134,7 +134,7 @@ class Player{
 							items.insertLast(temp->info);
 
 							//delete from room list
-							currentLocation->info.items.deleteNode(temp->info);
+							currentLocation->info->items.deleteNode(temp->info);
 						}
 						else
 						{
@@ -188,7 +188,7 @@ class Player{
 
 						//add to room list
 
-						currentLocation->info.items.insertLast(temp->info);
+						currentLocation->info->items.insertLast(temp->info);
 
 						//delete from player list
 
@@ -239,7 +239,13 @@ class Player{
 					if(n == temp->info->getName())
 					{
 						found = true;
-
+						/*************************************
+						ASCII GRAPHICS: Calling dsiplayImage()
+						*************************************/
+						if(temp->info->getType().find("graphical") != string::npos)
+						{
+							temp->info->displayImage();
+						}
 						//display item description
 						cout << temp->info->getDesc() << endl;
 						break;

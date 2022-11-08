@@ -137,5 +137,6 @@ class Game{
 			//remove item from each area in turn
 			player1->resetPlayerStats();
 			map->resetItems();
+			map->resetCombat();	//added comat reset!!!
 		}
 };

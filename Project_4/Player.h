@@ -6,6 +6,8 @@
 #endif
 
 class Player{
+	private: 
+	int ItemCounter = 0; 
 	public:
 		uLList<Item*> items;	//create an unlinked list of item pointers named 'items'
 
@@ -39,6 +41,36 @@ class Player{
 			return currentLocation;	//return the areaNode pointer of current location
 		}	
 
+		int checkbag() 
+		{ 
+			nodeType<Item*>* temp;	//create a nodeType pointer of type Item pointer named temp (points to the ULL if items)
+			temp = items.getFirst();	//set temp equal to the first item in the items list
+
+			//cout << temp << endl;
+
+			if(temp == NULL)	//if there are no items in the inventory
+			{
+				//cout << "No items are in your inventory." << endl;	//display it
+			}	
+			else
+			{
+				while(temp != NULL)	//iterate through the items linked list until temp reaches a null pointer
+				{
+					temp->info->getName();//access getName from Item.h through the linked lists info(type Item*) by temp
+					if (temp->info->getName() == "Bag")
+					{ 
+						return 1;		//sets the function to 1 if Bag is in the inventory 
+					}
+					else 
+					{ 
+
+					}
+					temp = temp->link;	//move to the next node
+				}
+			}
+		}
+
+
 		void inventory()
 		{
 			nodeType<Item*>* temp;	//create a nodeType pointer of type Item pointer named temp (points to the ULL if items)
@@ -71,42 +103,49 @@ class Player{
 
 			nodeType<Item*>* temp = NULL;	//create a nodeType pointer of type Item pointer called temp
 			temp = currentLocation->info.items.getFirst();	//get the first item in the current location
-			//cout << temp << endl;
 
-			if(temp == NULL)
-			{
-				cout << "No items are in this room to take." << endl;
-			}
-			else
-			{
-				bool found = false;	//create a found flag
-				while(temp != NULL && !found)	//while we aren't at the end of the list and the item is not found
+			if(ItemCounter <= 2 || checkbag() == 1)
+			{ 
+				if(temp == NULL)
 				{
-					if(n == temp->info->getName())	//if the item inputted is equal to the nodeType pointers info(item pointer) of getName
-					{
-						found = true;
-
-						//add to player list
-						items.insertLast(temp->info);
-
-						//delete from room list
-						currentLocation->info.items.deleteNode(temp->info);
-					}
-					else
-					{
-						temp = temp->link;	//go to next item in list if not found
-					}
-
-				}
-				if(found)
-				{
-					cout << "You have taken: " << n << endl;
+					cout << "No items are in this room to take." << endl;
 				}
 				else
 				{
-					cout << "No item by that name here." << endl;
+					bool found = false;	//create a found flag
+					while(temp != NULL && !found)	//while we aren't at the end of the list and the item is not found
+					{
+						if(n == temp->info->getName())	//if the item inputted is equal to the nodeType pointers info(item pointer) of getName
+						{
+							found = true;
+
+							//add to player list
+							items.insertLast(temp->info);
+
+							//delete from room list
+							currentLocation->info.items.deleteNode(temp->info);
+						}
+						else
+						{
+							temp = temp->link;	//go to next item in list if not found
+						}
+					}
+					if(found)
+					{
+						cout << "You have taken: " << n << endl;
+						ItemCounter++;
+					}
+					else
+					{
+						cout << "No item by that name here." << endl;
+					}
 				}
 			}
+			else 
+			{ 
+				cout << "You cannot take any more items... maybe if you had a bag you could take more items." << endl; 
+			}
+			//cout << temp << endl;
 		}
 
 		void leave()
@@ -120,7 +159,7 @@ class Player{
 			nodeType<Item*>* temp = NULL; 	//create a nodeType pointer of type Item pointer temp and set it to null;
 			temp = items.getFirst();		//point it to the first item in the items list
 
-			cout << temp << endl;
+			//cout << temp << endl;
 
 			if(temp == NULL)
 			{
@@ -147,17 +186,17 @@ class Player{
 					}
 					else
 					{
-						cout << "No item by that name in your inventory." << endl;
-						break;
+						temp=temp->link;
 					}
 				}
-				if(found)
+				if(!found)
 				{
-					cout << "You have dropped: " << n << endl;
+					cout << "No item by that name in your inventory." << endl;
 				}
 				else
 				{
-					cout << "No item by that name in your inventory." << endl;
+					cout << "You have left " << n << endl;
+					ItemCounter--;
 				}
 			}
 
@@ -213,7 +252,7 @@ class Player{
 		virtual void use(Map* mapptr) = 0;
 		virtual void takeCombatDamage() = 0;
 		virtual int getHP() = 0;
-
+		virtual string getType() = 0;
 	protected:
 		areaNode* currentLocation;	//create 2 areaNode pointers for the current location and the last location
 		areaNode* lastLocation;

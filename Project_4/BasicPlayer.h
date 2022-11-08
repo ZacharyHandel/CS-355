@@ -8,7 +8,13 @@ class BasicPlayer : public Player
 {
     private:
         //no new private attributes
+        string type = "basic";
     public:
+
+        string getType()
+        {
+            return type;
+        }
 
         int getHP()
         {

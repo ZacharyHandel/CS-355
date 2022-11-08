@@ -10,7 +10,12 @@ class HPSPPlayer : public Player
     protected:
         int hp = 100; //hit point
         int sp = 100; //sanity points
+        string type = "hpsp";
     public:
+        string getType()
+        {
+            return type;
+        }
 
         int getHP()
         {

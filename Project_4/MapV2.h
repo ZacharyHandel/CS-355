@@ -14,6 +14,7 @@ class MapV2 : public Map
         vector<Item*> itemVec; //vector for storing pointers to item objects
 		//vector<Player*> playerVec;	//new player vec for different kinds of player pointers (might not be needed, but just folloing repitition)
 		Player* tempPlayerPtr;
+		vector<int> combatVec;
     public:
         MapV2(){
 			ifderr = false;
@@ -121,6 +122,7 @@ class MapV2 : public Map
 					parser.eatToken();
 					nextToken = parser.getNext();
 					tempNodePtr->info.setCombatID(stoi(nextToken));
+					combatVec.push_back(stoi(nextToken));
 				}
 				else if(nextToken == "</desc>" || nextToken == "</feats>" || nextToken == "</combat>"){
 				  //do nothing
@@ -405,6 +407,14 @@ class MapV2 : public Map
                 areasVec[i]->info.items.destroyList();
             }
         }
+
+		void resetCombat()
+		{
+			for(int i = 0; i < areasVec.size(); i++)
+			{
+				areasVec[i]->info.setCombatID(combatVec[i]);	//RESET COMBAT VALUES
+			}
+		}
 
 		void makePlayer()
 		{

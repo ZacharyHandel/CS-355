@@ -53,7 +53,7 @@ class Area{
         return combatID;
     }
     
-
+    
     uLList<Item*> items;
 
     void search()

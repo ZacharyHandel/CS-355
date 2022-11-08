@@ -13,6 +13,10 @@ class Game{
 	protected:
 		MapV2* map = new MapV2;
 		Player* player1;
+
+		/************************************
+		 COMBAT SYSTEM: NEW COMBAT OBJECT
+		************************************/
 		Combat* combat;
   	public:
 		Game(){
@@ -31,13 +35,17 @@ class Game{
 					player1->getCurrent()->info.displayArea();
 					return;	// END THE GAME HERE
 				}
-				//CHECK FOR COMBAT HERE
 
+
+				//CHECK FOR COMBAT HERE
 				//if combatID == 1
-				if(player1->getCurrent()->info.getCombatID() == 1)
+				/****************************************
+				 COMBAT SYSTEM: CHECK FOR COMBAT ID
+				****************************************/
+				if(player1->getCurrent()->info.getCombatID() == 1)	//If there is combat
 				{
-						combat->displayCombatMessage();
-						combat->engageCombat(player1);
+						combat->displayCombatMessage();	//display message
+						combat->engageCombat(player1);	//starty combat event
 				}
 					//display area data
 				if(player1->playerMoved()){

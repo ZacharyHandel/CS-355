@@ -14,6 +14,10 @@ class MapV2 : public Map
         vector<Item*> itemVec; //vector for storing pointers to item objects
 		//vector<Player*> playerVec;	//new player vec for different kinds of player pointers (might not be needed, but just folloing repitition)
 		Player* tempPlayerPtr;
+
+		/**************************************
+		 COMBAT SYSTEM: CREATING NEW COMBAT VECTOR FOR RESET PURPOSES
+		**************************************/
 		vector<int> combatVec;
     public:
         MapV2(){
@@ -117,12 +121,16 @@ class MapV2 : public Map
           				getline(ss, xstr, ',');
 						tempNodePtr->info.setGoal(atoi(xstr.c_str()));
 				}
+				
+				/********************************************
+				 COMBAT SYSTEM: CREATING NEW PARSER TAG
+				********************************************/
 				else if(nextToken == "<combat>")
 				{
 					parser.eatToken();
 					nextToken = parser.getNext();
-					tempNodePtr->info.setCombatID(stoi(nextToken));
-					combatVec.push_back(stoi(nextToken));
+					tempNodePtr->info.setCombatID(stoi(nextToken));	//set combat ID
+					combatVec.push_back(stoi(nextToken));	//push to vector
 				}
 				else if(nextToken == "</desc>" || nextToken == "</feats>" || nextToken == "</combat>"){
 				  //do nothing

@@ -43,6 +43,10 @@ class Area{
 	cout<<description<<endl;		
     }
 
+
+    /********************************************
+     COMBAT SYSTEM: CREATEING SETTERS AND GETTERS
+    ********************************************/
     void setCombatID(bool cID)
     {
         combatID = cID;
@@ -80,6 +84,9 @@ class Area{
      string description;
      bool instadeath;
      bool goal;	
+     /************************************
+      COMBAT SYSTEM: SETTING COMBAT ID ATTRIBUTE
+     ************************************/
      bool combatID;
 };
 

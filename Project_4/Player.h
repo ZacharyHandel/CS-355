@@ -7,6 +7,10 @@
 
 class Player{
 	private: 
+
+	/*************************************
+	 BAG ITEM: creating item counter
+	*************************************/
 	int ItemCounter = 0; 
 	public:
 		uLList<Item*> items;	//create an unlinked list of item pointers named 'items'
@@ -41,6 +45,9 @@ class Player{
 			return currentLocation;	//return the areaNode pointer of current location
 		}	
 
+		/******************************************
+		 BAG ITEM: Check for bag
+		******************************************/
 		int checkbag() 
 		{ 
 			nodeType<Item*>* temp;	//create a nodeType pointer of type Item pointer named temp (points to the ULL if items)
@@ -104,6 +111,10 @@ class Player{
 			nodeType<Item*>* temp = NULL;	//create a nodeType pointer of type Item pointer called temp
 			temp = currentLocation->info.items.getFirst();	//get the first item in the current location
 
+
+			/***************************************
+			 BAG ITEM: Check for bag
+			***************************************/
 			if(ItemCounter <= 2 || checkbag() == 1)
 			{ 
 				if(temp == NULL)
@@ -143,7 +154,7 @@ class Player{
 			}
 			else 
 			{ 
-				cout << "You cannot take any more items... maybe if you had a bag you could take more items." << endl; 
+				cout << "You cannot take any more items... maybe if you had a bag." << endl; 
 			}
 			//cout << temp << endl;
 		}

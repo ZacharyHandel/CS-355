@@ -9,6 +9,10 @@
 #include <typeinfo>
 using namespace std;
 
+
+/**************************************
+ COMBAT SYSTEM: Combat class
+**************************************/
 class Combat
 {
     private:

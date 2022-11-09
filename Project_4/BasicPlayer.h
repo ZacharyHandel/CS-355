@@ -93,7 +93,7 @@ class BasicPlayer : public Player
                 {
                     cout << "No items by that name in your inventory." << endl;
                 }
-                else if(temp->info->getType() != "use")
+                else if(temp->info->getType().find("use") == string::npos)
                 {
                     cout << "There's no way to use this item." << endl;
                 }

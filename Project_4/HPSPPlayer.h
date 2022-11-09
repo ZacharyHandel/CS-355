@@ -105,9 +105,9 @@ class HPSPPlayer : public Player
                 {
                     cout << "No items by that name in your inventory." << endl;
                 }
-                else if(temp->info->getType() != "use")
+                else if(temp->info->getType().find("use") == string::npos)
                 {
-                    cout << "There's no way to use this item." << endl;
+                   cout << "There's no way to use this item." << endl;
                 }
                 else
                 {
@@ -209,10 +209,10 @@ class HPSPPlayer : public Player
 
             nodeType<Item*>* temp = items.getFirst();
 
-            cout << "Outside of detecting item in inventory***" << endl;
+            //cout << "Outside of detecting item in inventory***" << endl;
             if(temp == NULL)
             {
-                cout << "Inside temp == NULL***" << endl;
+                //cout << "Inside temp == NULL***" << endl;
                 cout << "You have no items in your inventory." << endl;
             }
             else
@@ -222,15 +222,15 @@ class HPSPPlayer : public Player
 
                 while(temp != NULL && found == false)
                 {  
-                    cout << "Inside While Loop***" << endl;
+                    //cout << "Inside While Loop***" << endl;
                     cout << "THIS IS THE ITEM IN THE SEARCH: " << temp->info->getName() << endl;
                     if(n == temp->info->getName())
                     {
-                        cout << "Inside if n is getName***" << endl;
+                        //cout << "Inside if n is getName***" << endl;
                         found = true;
                         if(temp->info->getActiveArea() == 0 || temp->info->getActiveArea() == mapptr->reverseLookUp(currentLocation))
                         {
-                            cout << "Inside if active area**" << endl;
+                            //cout << "Inside if active area**" << endl;
                             goodLocation = true;
                             //break;
                         }
@@ -243,7 +243,7 @@ class HPSPPlayer : public Player
 
                     if(found == true)
                     {
-                        cout << "SET FOUND TO TRUE****" << endl;
+                        //cout << "SET FOUND TO TRUE****" << endl;
                     }
                 }
 
@@ -251,7 +251,7 @@ class HPSPPlayer : public Player
                 {
                     cout << "No item by that name in your inventory." << endl;
                 }
-                else if(temp->info->getType() != "consume")
+                else if(temp->info->getType().find("consume") == string::npos)
                 {
                     cout << "That proves impossible" << endl;
                 }

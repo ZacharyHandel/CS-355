@@ -494,6 +494,7 @@ class MapV2 : public Map
 	void makeGraphicalUseItem()
 	{
 		Item* tempItemPtr = new GraphicalUseItem;
+		tempItemPtr->setType("graphicaluse");
 		
 		while(nextToken != "</graphicaluse>")
 		{
@@ -730,6 +731,7 @@ class MapV2 : public Map
 	void makeGraphicalConsumeItem()
 	{
 		Item* tempItemPtr = new GraphicalConsumeItem;
+		tempItemPtr->setType("graphicalconsume");
 		
 		while(nextToken != "</graphicalconsume>")
 		{

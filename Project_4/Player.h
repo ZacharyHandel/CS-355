@@ -106,7 +106,7 @@ class Player{
 			string n;
 			getline(cin, n);
 
-			cout << "Looking for item: " << n << endl;
+			//cout << "Looking for item: " << n << endl;
 
 			nodeType<Item*>* temp = NULL;	//create a nodeType pointer of type Item pointer called temp
 			temp = currentLocation->info->items.getFirst();	//get the first item in the current location

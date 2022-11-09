@@ -64,6 +64,11 @@ class Item
             return type;
         }
 
+        void setType(string s)
+        {
+            type = s;
+        }
+
         virtual void setActiveMessage(string s)
         {
             cout << "DEBUG WARNING: Objects of the Item (basic items) class don't have active messages." << endl;
